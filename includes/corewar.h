@@ -49,9 +49,16 @@ void		ft_open_check_and_get_file(t_asm *s_asm);
 
 typedef struct	s_vm
 {
-	int		ac;
-	char	**av;
+	int		nbr_cycles;
+	s_champ	*champ;
 }				t_vm;
+
+typedef struct	s_champ
+{
+	int		name;
+	int		fd;
+	s_champ	*next;
+}				t_champ;
 
 
 /*
@@ -68,6 +75,7 @@ char		*ft_strdup(const char *src);
 char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strsub(char const *s, unsigned int start, size_t len);
 void		ft_memdel(void **ap);
+int			ft_atoi(const char *str);
 
 int			get_next_line(int const fd, char **line);
 char		**ft_malloc_tabtab(char **tab, char *str);
