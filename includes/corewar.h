@@ -11,6 +11,12 @@
 # define PROG_NAME_LENGTH		(128)
 # define COMMENT_LENGTH			(2048)
 
+#define NAME_CMD_STRING			".name"
+#define COMMENT_CMD_STRING		".comment"
+
+# define COREWAR_EXEC_MAGIC		0xea83f3 // Doit se trouver au debut du .cor
+
+
 # define BUFF_SIZE 32
 
 
@@ -25,6 +31,11 @@
  	char	**file;
  	char	bool_name;
  	char	bool_comment;
+
+	unsigned int		magic;
+	char				prog_name[PROG_NAME_LENGTH + 1];
+	unsigned int		prog_size;
+	char				comment[COMMENT_LENGTH + 1];
  }				t_asm;
 
 void		ft_error(size_t id_error, char *name);

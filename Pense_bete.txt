@@ -1,0 +1,9 @@
+ASM
+
+Tous les ./cor commencent par la valeur de COREWAR_EXEC_MAGIC
+	si COREWAR_EXEC_MAGIC = 0xea83f3
+	alors hexdump file.cor commence par
+	00 ea 83 f3 ... etc
+
+Les champions ne peuvent pas peser plus lourd que la taille de la memoire de la vm / 4.
+Si MEM_SIZE = 4096, alors CHAMP_MAX_SIZE = 682

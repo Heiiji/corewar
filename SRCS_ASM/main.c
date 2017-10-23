@@ -9,6 +9,10 @@ static t_asm *ft_init_variables(int ac, char **av)
 		ft_error(2, NULL);
 	s_asm->av = av;
 	s_asm->file = NULL;
+	s_asm->bool_name = 0;
+	s_asm->bool_comment = 0;
+	s_asm->magic = COREWAR_EXEC_MAGIC;
+	s_asm->prog_size = 0; // Hmmm
 	return (s_asm);
 }
 
