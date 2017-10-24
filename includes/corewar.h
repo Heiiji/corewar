@@ -18,6 +18,7 @@
 
 
 # define BUFF_SIZE 32
+# define OPEN_MAX 666
 
 
 /*
@@ -47,18 +48,18 @@ void		ft_open_check_and_get_file(t_asm *s_asm);
 ** Virtual Machine Part
 */
 
+typedef struct	s_champ
+{
+	int				name;
+	int				fd;
+	struct t_champ	*next;
+}				t_champ;
+
 typedef struct	s_vm
 {
 	int		nbr_cycles;
-	s_champ	*champ;
+	t_champ	*champ;
 }				t_vm;
-
-typedef struct	s_champ
-{
-	int		name;
-	int		fd;
-	s_champ	*next;
-}				t_champ;
 
 
 /*

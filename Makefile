@@ -31,18 +31,18 @@ OBJ_ASM = $(SRCS_ASM:.c=.o)
 all: $(NAME_ASM) $(NAME_VMA)
 
 $(NAME_ASM): $(OBJ_ASM)
-	@gcc $(FLAG) -g3 -fsanitize=address -o $(NAME_ASM) $(OBJ_ASM)
+	@clang $(FLAG) -o $(NAME_ASM) $(OBJ_ASM)
 	@ echo "🚧  \033[33mWORK IN PROGRESS\033[0m 🚧"
 	@ echo "Compilation \033[36mASM\033[0m: [\033[32mcompleted\033[0m]"
 
 $(NAME_VMA): $(OBJ_VMA)
-	@gcc $(FLAG) -g3 -fsanitize=address -o $(NAME_VMA) $(OBJ_VMA)
+	@clang $(FLAG) -o $(NAME_VMA) $(OBJ_VMA)
 	@ echo "🚧  \033[33mWORK IN PROGRESS\033[0m 🚧"
 	@ echo "Compilation \033[36mVAM\033[0m: [\033[32mcompleted\033[0m]"
 
 %.o: %.c
-	@gcc $(FLAG_ASM) -c $< -o $@
-	@gcc $(FLAG_VMA) -c $< -o $@
+	@clang $(FLAG_ASM) -c $< -o $@
+	@clang $(FLAG_VMA) -c $< -o $@
 
 clean:
 	@rm -f $(OBJ_ASM)
