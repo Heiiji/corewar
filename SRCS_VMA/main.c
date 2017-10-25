@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/10/24 17:55:56 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/10/25 16:49:10 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,42 @@ void	ft_vm_error(char *error)
 {
 	ft_put(error, ft_strlen(error), 2, 0);
 	exit(0);
+}
+
+void	make_player(s_vm *env, int nbr)
+{
+	int		max_size;
+	int		cur;
+	char	*line
+	s_champ	*champ;
+
+	cur = 0;
+	max_size = MEM_SIZE/nbr;
+	champ = env->champ;
+	while (champ)
+	{
+		while (get_next_line(champ->fd, &line) == 1)
+		{
+			//on ecrit tout dans l'arene avec un decalage de max_size pour chaque champion (champion n decaler de max_size*(n-1))
+		}
+		champ = champ->next;
+	}
+}
+
+void	make_arene(s_vm *env)
+{
+	s_champ	*cur;
+	int		nbr;
+
+	if (!(env->arene = (char*)malloc(MEM_SIZE)))
+		ft_vm_error("Erreur de malloc pour l'arene");
+	cur = env->champ;
+	while (cur)
+	{
+		cur = cur->next;
+		nbr++;
+	}
+	make_player(env, nbr);
 }
 
 int	put_name(int *cur, char **av)
@@ -45,6 +81,7 @@ int main(int ac, char **av)
 	if (!(champ = (t_champ*)malloc(sizeof(t_champ))))
 		ft_vm_error("Erreur de malloc sur le premier champions");
 	env.champ = champ;
+	champ->next = NULL;
 	cur = 1;
 	if (ft_strcmp(av[1], "-dump") == 0)
 	{
@@ -53,13 +90,18 @@ int main(int ac, char **av)
 	}
 	while (cur < ac)
 	{
+		if (champ->next)
+			champ = champ->next;
 		champ->name = put_name(&cur, av);
+		if (!(champ->fd = open(av[cur], O_LARGEFILE)))
+			ft_vm_error("Erreur d'ouverture des fichier");;
 		if (!(champ->next = (t_champ*)malloc(sizeof(t_champ))))
 			ft_vm_error("Erreur de malloc sur les champions");
-		champ = champ->next;
 		cur++;
 	}
+	free (champ->next);
 	champ->next = NULL;
+	make_arene(&env);
 	// DEBUG
 	champ = env.champ;
 	while (champ)

@@ -52,6 +52,7 @@ typedef struct	s_champ
 {
 	int				name;
 	int				fd;
+	long			pc; //point d'entree
 	struct t_champ	*next;
 }				t_champ;
 
@@ -59,6 +60,7 @@ typedef struct	s_vm
 {
 	int		nbr_cycles;
 	t_champ	*champ;
+	char	*arene;
 }				t_vm;
 
 
@@ -77,6 +79,8 @@ char		*ft_strjoin(char const *s1, char const *s2);
 char		*ft_strsub(char const *s, unsigned int start, size_t len);
 void		ft_memdel(void **ap);
 int			ft_atoi(const char *str);
+char		*ft_itoa(int n);
+void		*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
 
 int			get_next_line(int const fd, char **line);
 char		**ft_malloc_tabtab(char **tab, char *str);
