@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/10/25 16:49:10 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/10/26 10:27:29 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ void	make_player(s_vm *env, int nbr)
 	{
 		while (get_next_line(champ->fd, &line) == 1)
 		{
+			// un memset dans le gn a '0' serait bien
+			ft_memcpy(arene[cur * max_size], line, max_size);
+			cur ++;
 			//on ecrit tout dans l'arene avec un decalage de max_size pour chaque champion (champion n decaler de max_size*(n-1))
 		}
 		champ = champ->next;

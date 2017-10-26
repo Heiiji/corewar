@@ -7,6 +7,7 @@
 # include <limits.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include "op.h"
 
 # define PROG_NAME_LENGTH		(128)
 # define COMMENT_LENGTH			(2048)
@@ -17,7 +18,7 @@
 # define COREWAR_EXEC_MAGIC		0xea83f3 // Doit se trouver au debut du .cor
 
 
-# define BUFF_SIZE 32
+# define BUFF_SIZE (CHAMP_MAX_SIZE)
 # define OPEN_MAX 666
 
 
