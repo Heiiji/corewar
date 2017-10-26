@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/10/26 10:27:29 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/10/26 10:37:31 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	ft_vm_error(char *error)
 	exit(0);
 }
 
-void	make_player(s_vm *env, int nbr)
+void	make_player(t_vm *env, int nbr)
 {
 	int		max_size;
 	int		cur;
-	char	*line
+	char	*line;
 	s_champ	*champ;
 
 	cur = 0;
@@ -41,9 +41,9 @@ void	make_player(s_vm *env, int nbr)
 	}
 }
 
-void	make_arene(s_vm *env)
+void	make_arene(t_vm *env)
 {
-	s_champ	*cur;
+	t_champ	*cur;
 	int		nbr;
 
 	if (!(env->arene = (char*)malloc(MEM_SIZE)))
@@ -96,7 +96,7 @@ int main(int ac, char **av)
 		if (champ->next)
 			champ = champ->next;
 		champ->name = put_name(&cur, av);
-		if (!(champ->fd = open(av[cur], O_LARGEFILE)))
+		if (!(champ->fd = open(av[cur], O_RDONLY)))
 			ft_vm_error("Erreur d'ouverture des fichier");;
 		if (!(champ->next = (t_champ*)malloc(sizeof(t_champ))))
 			ft_vm_error("Erreur de malloc sur les champions");
