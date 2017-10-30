@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/10/26 11:00:32 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/10/30 13:55:50 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	put_name(int *cur, char **av)
 {
 	static int	name = 0;
 
-	if (ft_strcmp(av[*cur], "-n"))
+	if (ft_strcmp(av[*cur], "-n") == 0)
 	{
 		*cur += 1;
 		if (av[*cur][0] < (char)'0' || av[*cur][0] > (char)'9')
-			ft_vm_error("Erreur de format de la commande");
+			ft_vm_error("Erreur de format de la commande\n");
 		return (ft_atoi(av[*cur]));
 	}
 	else
@@ -42,8 +42,10 @@ int main(int ac, char **av)
 	t_vm	env;
 	t_champ	*champ;
 
+	if (ac < 2)
+		ft_vm_error("Erreur d'argument\n");
 	if (!(champ = (t_champ*)malloc(sizeof(t_champ))))
-		ft_vm_error("Erreur de malloc sur le premier champions");
+		ft_vm_error("Erreur de malloc sur le premier champions\n");
 	env.champ = champ;
 	champ->next = NULL;
 	cur = 1;
@@ -56,11 +58,11 @@ int main(int ac, char **av)
 	{
 		if (champ->next)
 			champ = champ->next;
-		champ->name = put_name(&cur, av);
+		champ->id = put_name(&cur, av);
 		if (!(champ->fd = open(av[cur], O_RDONLY)))
-			ft_vm_error("Erreur d'ouverture des fichier");;
+			ft_vm_error("Erreur d'ouverture des fichier\n");;
 		if (!(champ->next = (t_champ*)malloc(sizeof(t_champ))))
-			ft_vm_error("Erreur de malloc sur les champions");
+			ft_vm_error("Erreur de malloc sur les champions\n");
 		cur++;
 	}
 	free (champ->next);

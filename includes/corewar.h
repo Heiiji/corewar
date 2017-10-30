@@ -19,7 +19,9 @@
 
 
 # define BUFF_SIZE (CHAMP_MAX_SIZE)
-# define OPEN_MAX 666
+# ifndef OPEN_MAX
+# 	define OPEN_MAX 666
+# endif
 
 
 /*
@@ -51,17 +53,19 @@ void		ft_open_check_and_get_file(t_asm *s_asm);
 
 typedef struct	s_champ
 {
-	int				name;
+	int				id;
+	char			*name;
 	int				fd;
 	long			pc; //point d'entree
-	struct t_champ	*next;
-}				t_champ;
+	struct s_champ	*next;
+}					t_champ;
 
 typedef struct	s_vm
 {
-	int		nbr_cycles;
-	t_champ	*champ;
-	char	*arene;
+	int			nbr_cycles;
+	t_champ		*champ;
+	t_header	head;
+	char		*arene;
 }				t_vm;
 
 void	ft_vm_error(char *error);

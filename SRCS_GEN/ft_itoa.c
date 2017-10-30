@@ -6,12 +6,11 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 18:59:39 by jjuret            #+#    #+#             */
-/*   Updated: 2016/11/09 13:33:21 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/10/30 13:21:12 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "./libft.h"
 
 static int	isneg(int *target, int *neg)
 {
