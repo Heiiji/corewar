@@ -25,14 +25,19 @@ void	live(char **pc)
 	*pc += 4;
 }
 
-void	ld(char **pc)
+void	ld(char **pc, char *arene)
 {
 	char	value;
-	char	*target;
 
 	value = **pc;
 	*pc++;
-	target = *pc + (**pc * REG_SIZE);
-	target += value;
+	arene[**pc * REG_SIZE] += value;
 	*pc++;
+}
+
+void	st(char **pc, char *arene)
+{
+	char	*target;
+
+	target = &arene[**pc * REG_SIZE];
 }

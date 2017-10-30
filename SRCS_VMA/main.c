@@ -68,12 +68,5 @@ int main(int ac, char **av)
 	free (champ->next);
 	champ->next = NULL;
 	make_arene(&env);
-	// DEBUG
-	champ = env.champ;
-	while (champ)
-	{
-		ft_put(champ->name, ft_strlen(champ->name), 1, 0);
-		champ = champ->next;
-	}
 	return (0);
 }

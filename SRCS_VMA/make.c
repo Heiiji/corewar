@@ -31,7 +31,6 @@ void	make_player(t_vm *env, int nbr)
 		if (read(champ->fd, &env->arene[cur * max_size], env->head.prog_size + 1) != env->head.prog_size)
 			ft_vm_error("ERROR: incorect file\n");
 		cur ++;
-		// on ecrit tout dans l'arene avec un decalage de max_size pour chaque champion (champion n decaler de max_size*(n-1))
 		champ = champ->next;
 	}
 }

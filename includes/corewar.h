@@ -54,7 +54,6 @@ void		ft_open_check_and_get_file(t_asm *s_asm);
 typedef struct	s_champ
 {
 	int				id;
-	char			*name;
 	int				fd;
 	long			pc; //point d'entree
 	struct s_champ	*next;
@@ -90,7 +89,6 @@ void		ft_memdel(void **ap);
 int			ft_atoi(const char *str);
 char		*ft_itoa(int n);
 void		*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
-
 int			get_next_line(int const fd, char **line);
 char		**ft_malloc_tabtab(char **tab, char *str);
 
