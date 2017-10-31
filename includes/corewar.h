@@ -59,13 +59,13 @@ typedef struct	s_champ
 	struct s_champ	*next;
 }					t_champ;
 
-typedef struct	s_vm
+typedef struct		s_vm
 {
-	int			nbr_cycles;
-	t_champ		*champ;
-	t_header	head;
-	char		*arene;
-}				t_vm;
+	int				nbr_cycles;
+	t_champ			*champ;
+	t_header		head;
+	unsigned char	*arene;
+}					t_vm;
 
 void	ft_vm_error(char *error);
 void	make_arene(t_vm *env);
