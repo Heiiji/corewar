@@ -12,12 +12,14 @@ SRCS_GEN =	SRCS_GEN/put.c				\
 			SRCS_GEN/memdel.c			\
 			SRCS_GEN/strjoin.c			\
 			SRCS_GEN/memmove.c			\
+			SRCS_GEN/ft_memcpy.c			\
 			SRCS_GEN/get_next_line.c	\
 			SRCS_GEN/malloc_tabtab.c 	\
 			SRCS_GEN/ft_atoi.c			\
 
 SRCS_VMA  = SRCS_VMA/main.c				\
 			SRCS_VMA/make.c 			\
+			SRCS_VMA/fonc.c 			\
 			$(SRCS_GEN)
 
 

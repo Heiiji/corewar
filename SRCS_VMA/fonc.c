@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 12:45:17 by jjuret            #+#    #+#             */
-/*   Updated: 2017/10/31 10:08:38 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/10/31 15:20:14 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	live(unsigned char **pc)
 	char	*tmp;
 
 	tmp = (char *)malloc(5);
-	ft_memcpy(tmp, target, 4);
+	ft_memcpy(tmp, *pc, 4);
 	tmp[4] = '\0';
 	ft_put(tmp, 4, 1, 0);
 	ft_put(" is alive !", 11, 1, 0);
@@ -55,17 +55,30 @@ void	live(unsigned char **pc)
 
 void	ld(unsigned char **pc, char *arene)
 {
-	char	value;
+	unsigned char	value;
+	unsigned char	*elem;
+	short			val;
+	int				val2;
+	unsigned char	*ref;
 
+	ref = *pc - 1;
 	if (oct_codage(3, 1, **pc) == 1)
 	{
-		*pc++;
-		// cest un T_IND
+		*pc += 1;
+		elem = ft_memdup(*pc, 4);
+		val2 = (int)(*elem);
+		*pc += 4;
+		arene[**pc * REG_SIZE] += value;
 	}
-	value = **pc;
-	*pc++;
-	arene[**pc * REG_SIZE] += value;
-	*pc++;
+	else
+	{
+		*pc += 1;
+		elem = ft_memdup(*pc, 2);
+		val = (short)(*elem);
+		*pc += 2;
+		arene[**pc * REG_SIZE] += value;
+	}
+	*pc += 1;
 }
 
 void	st(unsigned char **pc, char *arene)

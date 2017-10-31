@@ -89,6 +89,7 @@ void		ft_memdel(void **ap);
 int			ft_atoi(const char *str);
 char		*ft_itoa(int n);
 void		*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
+void		*ft_memdup(const void *restrict src, size_t n);
 int			get_next_line(int const fd, char **line);
 char		**ft_malloc_tabtab(char **tab, char *str);
 
