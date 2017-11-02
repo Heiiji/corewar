@@ -55,7 +55,10 @@ typedef struct	s_champ
 {
 	int				id;
 	int				fd;
+	double			cycle;
 	long			pc; //point d'entree
+  	char      		carry;
+  	unsigned char	registre[REG_SIZE * REG_NUMBER];
 	struct s_champ	*next;
 }					t_champ;
 
@@ -90,6 +93,7 @@ int			ft_atoi(const char *str);
 char		*ft_itoa(int n);
 void		*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
 void		*ft_memdup(const void *restrict src, size_t n);
+void	  	*ft_memset(void *b, int c, size_t len);
 int			get_next_line(int const fd, char **line);
 char		**ft_malloc_tabtab(char **tab, char *str);
 

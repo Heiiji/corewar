@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/10/30 13:55:50 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/02 14:03:32 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int main(int ac, char **av)
 			champ = champ->next;
 		champ->id = put_name(&cur, av);
 		if (!(champ->fd = open(av[cur], O_RDONLY)))
-			ft_vm_error("Erreur d'ouverture des fichier\n");;
+			ft_vm_error("Erreur d'ouverture des fichier\n");
+		ft_memset(champ->registre, 0, REG_SIZE * REG_NUMBER);
 		if (!(champ->next = (t_champ*)malloc(sizeof(t_champ))))
 			ft_vm_error("Erreur de malloc sur les champions\n");
 		cur++;

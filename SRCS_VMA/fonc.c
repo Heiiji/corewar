@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 12:45:17 by jjuret            #+#    #+#             */
-/*   Updated: 2017/10/31 15:20:14 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/02 16:33:41 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	live(unsigned char **pc)
 	*pc += 4;
 }
 
-void	ld(unsigned char **pc, char *arene)
+void	ld(unsigned char **pc, char *arene, t_champ *champ)
 {
 	unsigned char	value;
 	unsigned char	*elem;
@@ -68,7 +68,7 @@ void	ld(unsigned char **pc, char *arene)
 		elem = ft_memdup(*pc, 4);
 		val2 = (int)(*elem);
 		*pc += 4;
-		arene[**pc * REG_SIZE] += value;
+		champ->registre[(REG_SIZE * **pc) % (REG_SIZE * REG_NUMBER)] = value;
 	}
 	else
 	{
@@ -76,14 +76,62 @@ void	ld(unsigned char **pc, char *arene)
 		elem = ft_memdup(*pc, 2);
 		val = (short)(*elem);
 		*pc += 2;
-		arene[**pc * REG_SIZE] += value;
+		champ->registre[(REG_SIZE * **pc) % (REG_SIZE * REG_NUMBER)] = value;
 	}
 	*pc += 1;
 }
 
-void	st(unsigned char **pc, char *arene)
+void	st(unsigned char **pc, unsigned char *arene, t_champ *champ)
 {
-	char	*target;
+	unsigned char	*reg;
+	unsigned char	*ref;
+	unsigned char	*elem;
 
-	target = &arene[**pc * REG_SIZE];
+	ref = *pc - 1;
+	if (oct_codage(1, 2, **pc) == 1)
+	{
+		*pc += 1;
+		reg = champ->registre[(REG_SIZE * **pc) % (REG_SIZE * REG_NUMBER)];
+		*pc += 1;
+		ft_memcpy(champ->registre[(REG_SIZE * **pc) % (REG_SIZE * REG_NUMBER)], reg, REG_SIZE);
+	}
+	else
+	{
+		*pc += 1;
+		reg = champ->registre[(REG_SIZE * **pc) % (REG_SIZE * REG_NUMBER)];
+		*pc += 1;
+		elem = ft_memdup(*pc, 2);
+		ft_memcpy(champ->registre[(REG_SIZE * (short)(*elem)) % (REG_SIZE * REG_NUMBER)], reg, REG_SIZE);
+		*pc += 2;
+		free(elem);
+	}
+	champ->>carry = 1;
+	*pc += 1;
+}
+
+void	add(unsigned char **pc, t_champ *champ)
+{
+	unsigned char	*reg;
+	unsigned char	*reg2;
+
+	*pc += 1;
+	champ->registre[*(*pc + 2)] = champ->registre[*(*pc + 1)] + champ->registre[**pc];
+	champ->carry = 1;
+	*pc += 3;
+}
+
+void	sub(unsigned char **pc, t_champ *champ)
+{
+	unsigned char	*reg;
+	unsigned char	*reg2;
+
+	*pc += 1;
+	champ->registre[*(*pc + 2)] = champ->registre[*(*pc + 1)] - champ->registre[**pc];
+	champ->carry = 1;
+	*pc += 3;
+}
+
+void	and(unsigned char **pc, t_champ *champ)
+{
+
 }
