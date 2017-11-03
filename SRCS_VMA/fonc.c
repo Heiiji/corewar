@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 12:45:17 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/03 12:08:26 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/03 14:57:18 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	and(unsigned char *arene, t_champ *champ)
 	int 			val;
 	int				val2;
 	int				refn;
-	unsigned char	*ref;
+	unsigned char	ref;
 
 	ref = arene[champ->pc];
 	refn = champ->pc - 1;
@@ -140,7 +140,7 @@ void	and(unsigned char *arene, t_champ *champ)
 	if (oct_codage(1,1, ref) == 1)
 	{
 		val = champ->registre[arene[champ->pc]];
-		champ->pc += 1
+		champ->pc += 1;
 	}
 	else if (oct_codage(3,1, ref) == 1)
 	{
@@ -177,7 +177,7 @@ void	or(unsigned char *arene, t_champ *champ)
 	int 			val;
 	int				val2;
 	int				refn;
-	unsigned char	*ref;
+	unsigned char	ref;
 
 	ref = arene[champ->pc];
 	refn = champ->pc - 1;
@@ -185,7 +185,7 @@ void	or(unsigned char *arene, t_champ *champ)
 	if (oct_codage(1,1, ref) == 1)
 	{
 		val = champ->registre[arene[champ->pc]];
-		champ->pc += 1
+		champ->pc += 1;
 	}
 	else if (oct_codage(3,1, ref) == 1)
 	{
@@ -210,7 +210,7 @@ void	or(unsigned char *arene, t_champ *champ)
 	else
 	{
 		val = (int)arene[refn + (int)arene[champ->pc % MEM_SIZE]];
-		champ->pc += 4
+		champ->pc += 4;
 	}
 	val = val | val2;
 	memcpy(champ->registre[REG_SIZE * arene[champ->pc % MEM_SIZE]], (char*)(&val), 4);
@@ -222,7 +222,7 @@ void	xor(unsigned char *arene, t_champ *champ)
 	int 			val;
 	int				val2;
 	int				refn;
-	unsigned char	*ref;
+	unsigned char	ref;
 
 	ref = arene[champ->pc];
 	refn = champ->pc - 1;
@@ -230,7 +230,7 @@ void	xor(unsigned char *arene, t_champ *champ)
 	if (oct_codage(1,1, ref) == 1)
 	{
 		val = champ->registre[arene[champ->pc]];
-		champ->pc += 1
+		champ->pc += 1;
 	}
 	else if (oct_codage(3,1, ref) == 1)
 	{
@@ -255,7 +255,7 @@ void	xor(unsigned char *arene, t_champ *champ)
 	else
 	{
 		val = (int)arene[refn + (int)arene[champ->pc % MEM_SIZE]];
-		champ->pc += 4
+		champ->pc += 4;
 	}
 	val = val ^ val2;
 	memcpy(champ->registre[REG_SIZE * arene[champ->pc % MEM_SIZE]], (char*)(&val), 4);

@@ -79,6 +79,7 @@ void	exec2(t_vm *env, t_champ *champ, unsigned char commande);
 void	live(unsigned char *arene, t_champ *champ);
 void	ld(unsigned char *arene, t_champ *champ);
 void	st(unsigned char *arene, t_champ *champ);
+void	add(unsigned char *arene, t_champ *champ);
 void	sub(unsigned char *arene, t_champ *champ);
 void	and(unsigned char *arene, t_champ *champ);
 void	or(unsigned char *arene, t_champ *champ);
