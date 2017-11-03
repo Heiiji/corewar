@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/02 14:03:32 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/03 10:47:52 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,24 @@ int	put_name(int *cur, char **av)
 	{
 		name++;
 		return (name);
+	}
+}
+
+void	crawler(t_vm *env)
+{
+	t_champ				*champ;
+	unsigned long long	cycle;
+
+	cycle = 0;
+	while (cycle < CYCLE_TO_DIE)
+	{
+		champ = env->champ;
+		while (cycle == champ->cycle)
+		{
+			champ = champ->next;
+			exec(env, env->champ);
+		}
+		cycle = env->champ->cycle;
 	}
 }
 
@@ -69,5 +87,6 @@ int main(int ac, char **av)
 	free (champ->next);
 	champ->next = NULL;
 	make_arene(&env);
+	crawler(&env);
 	return (0);
 }

@@ -53,26 +53,36 @@ void		ft_open_check_and_get_file(t_asm *s_asm);
 
 typedef struct	s_champ
 {
-	int				id;
-	int				fd;
-	double			cycle;
-	long			pc; //point d'entree
-  	char      		carry;
-  	unsigned char	registre[REG_SIZE * REG_NUMBER];
-	struct s_champ	*next;
+	int					id;
+	t_header			head;
+	int					fd;
+	unsigned long long	cycle;
+	unsigned long long	pc;
+  	char      			carry;
+  	unsigned char		registre[REG_SIZE * REG_NUMBER];
+	struct s_champ		*next;
 }					t_champ;
 
 typedef struct		s_vm
 {
 	int				nbr_cycles;
 	t_champ			*champ;
-	t_header		head;
 	unsigned char	*arene;
 }					t_vm;
 
 void	ft_vm_error(char *error);
 void	make_arene(t_vm *env);
 void	make_player(t_vm *env, int nbr);
+void	rang(t_vm *env, t_champ *champ);
+void	exec(t_vm *env, t_champ *champ);
+void	exec2(t_vm *env, t_champ *champ, unsigned char commande);
+void	live(unsigned char *arene, t_champ *champ);
+void	ld(unsigned char *arene, t_champ *champ);
+void	st(unsigned char *arene, t_champ *champ);
+void	sub(unsigned char *arene, t_champ *champ);
+void	and(unsigned char *arene, t_champ *champ);
+void	or(unsigned char *arene, t_champ *champ);
+void	xor(unsigned char *arene, t_champ *champ);
 
 
 /*
