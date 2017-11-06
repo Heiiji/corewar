@@ -56,6 +56,7 @@ typedef struct	s_champ
 	int					id;
 	t_header			head;
 	int					fd;
+	unsigned char		*action;
 	unsigned long long	cycle;
 	unsigned long long	pc;
   	char      			carry;
