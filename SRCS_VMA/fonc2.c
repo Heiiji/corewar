@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 07:51:18 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/07 14:47:21 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/07 15:14:00 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	sub(unsigned char *arene, t_champ *champ)
 {
 	champ->pc += 1;
-	champ->registre[arene[champ->pc + 2]] = champ->registre[arene[champ->pc + 1]] - champ->registre[arene[champ->pc]];
+	champ->registre[arene[champ->pc + 2]] = champ->registre[arene[champ->pc + 1\
+	]] - champ->registre[arene[champ->pc]];
 	champ->carry = 1;
 	champ->pc += 3;
 }
