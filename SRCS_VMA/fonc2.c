@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 07:51:18 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/07 12:18:51 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/07 13:28:05 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	and(unsigned char *arene, t_champ *champ)
 	}
 	else
 	{
-		val = (int)arene[champ->pc - 2 + *((int*)&arene[champ->pc % MEM_SIZE])];
+		val = *((int*)&arene[champ->pc - 2 + *((int*)&arene[champ->pc % MEM_SIZE])]);
 		champ->pc += 4;
 	}
 	if (oct_codage(1,2, ref) == 1)
@@ -127,12 +127,12 @@ void	xor(unsigned char *arene, t_champ *champ)
 	}
 	else if (oct_codage(3,1, ref) == 1)
 	{
-		val = (short)arene[champ->pc];
+		val = *((short*)&arene[champ->pc]);
 		champ->pc += 2;
 	}
 	else
 	{
-		val = (int)arene[champ->pc - 2 + (int)arene[champ->pc % MEM_SIZE]];
+		val = *((int*)&arene[champ->pc - 2 + *((int*)&arene[champ->pc % MEM_SIZE])]);
 		champ->pc += 4;
 	}
 	if (oct_codage(1,2, ref) == 1)
@@ -142,12 +142,12 @@ void	xor(unsigned char *arene, t_champ *champ)
 	}
 	else if (oct_codage(3,2, ref) == 1)
 	{
-		val2 = (short)arene[champ->pc % MEM_SIZE];
+		val2 = *((short*)&arene[champ->pc % MEM_SIZE]);
 		champ->pc += 2;
 	}
 	else
 	{
-		val = (int)arene[refn + (int)arene[champ->pc % MEM_SIZE]];
+		val = *((int*)&arene[refn + *((int*)&arene[champ->pc % MEM_SIZE])]);
 		champ->pc += 4;
 	}
 	val = val ^ val2;
@@ -159,7 +159,7 @@ void	zjump(unsigned char *arene, t_champ *champ)
 {
 	short	value;
 
-	value = (short)arene[champ->pc];
+	value = *((short*)&arene[champ->pc]);
 	if (champ->carry == 1)
 		champ->pc = champ->pc - 1 + value;
 	else
@@ -183,9 +183,9 @@ void	ldi(unsigned char *arene, t_champ *champ)
 	}
 	else
 	{
-		val = (short)champ->registre[arene[champ->pc % MEM_SIZE]];
+		val = *((short*)&champ->registre[arene[champ->pc % MEM_SIZE]]);
 		if (oct_codage(2,1, ref) == 1)
-			val = (short)arene[(refn + (val % IDX_MOD)) % MEM_SIZE];
+			val = *((short*)&arene[(refn + (val % IDX_MOD)) % MEM_SIZE]);
 		champ->pc += 2;
 	}
 	if (oct_codage(1,2, ref) == 1)
@@ -229,12 +229,12 @@ void	sti(unsigned char *arene, t_champ *champ)
 	}
 	if (oct_codage(1,3, ref) == 1)
 	{
-		ft_memcpy(&(arene[(add + (int)champ->registre[arene[champ->pc % MEM_SIZE]]) % MEM_SIZE]), &champ->registre[reg * REG_SIZE], REG_SIZE);
+		ft_memcpy(&(arene[(add + *((int*)&champ->registre[arene[champ->pc % MEM_SIZE]])) % MEM_SIZE]), &champ->registre[reg * REG_SIZE], REG_SIZE);
 		champ->pc += 1;
 	}
 	else
 	{
-		ft_memcpy(&(arene[(add + (int)arene[champ->pc]) % MEM_SIZE]), &champ->registre[reg * REG_SIZE], REG_SIZE);
+		ft_memcpy(&(arene[(add + *((int*)&arene[champ->pc])) % MEM_SIZE]), &champ->registre[reg * REG_SIZE], REG_SIZE);
 		champ->pc += 2;
 	}
 }
@@ -246,7 +246,7 @@ void	ft_fork(unsigned char *arene, t_champ *champ, t_vm *env)
 	t_champ			*new;
 
 	refn = champ->pc - 1;
-	target = (short)arene[champ->pc];
+	target = *((short*)&arene[champ->pc]);
 	new = (t_champ*)malloc(sizeof(t_champ));
 	new->action = NULL;
 	new->next = env->champ;
@@ -272,7 +272,7 @@ void	lld(unsigned char *arene, t_champ *champ)
 	if (oct_codage(3, 1, arene[champ->pc]) == 1)
 	{
 		champ->pc += 1;
-		val2 = (short)arene[champ->pc];
+		val2 = *((short*)&arene[champ->pc]);
 		champ->pc += 2;
 		ft_memcpy(&champ->registre[arene[champ->pc]], &arene[(ref + val2) % MEM_SIZE], REG_SIZE);
 		champ->pc += 1;
@@ -280,8 +280,8 @@ void	lld(unsigned char *arene, t_champ *champ)
 	else
 	{
 		champ->pc += 1;
-		val = (int)arene[champ->pc];
-		val = (int)arene[(ref + val) % MEM_SIZE];
+		val = *((int*)&arene[champ->pc]);
+		val = *((int*)&arene[(ref + val) % MEM_SIZE]);
 		champ->pc += 4;
 		ft_memcpy(&champ->registre[arene[champ->pc]], &arene[(ref + val) % MEM_SIZE], REG_SIZE);
 		champ->pc += 1;
@@ -305,9 +305,9 @@ void	lldi(unsigned char *arene, t_champ *champ)
 	}
 	else
 	{
-		val = (short)champ->registre[arene[champ->pc % MEM_SIZE]];
+		val = *((short*)&champ->registre[arene[champ->pc % MEM_SIZE]]);
 		if (oct_codage(2,1, ref) == 1)
-			val = (short)arene[(refn + val) % MEM_SIZE];
+			val = *((short*)&arene[(refn + val) % MEM_SIZE]);
 		champ->pc += 2;
 	}
 	if (oct_codage(1,2, ref) == 1)
@@ -317,8 +317,8 @@ void	lldi(unsigned char *arene, t_champ *champ)
 	}
 	else
 	{
-		val2 = (short)champ->registre[arene[champ->pc % MEM_SIZE]];
-		val2 = (short)arene[(refn + val2) % MEM_SIZE];
+		val2 = *((short*)&champ->registre[arene[champ->pc]]);
+		val2 = *((short*)&arene[(refn + val2) % MEM_SIZE]);
 		champ->pc += 2;
 	}
 	ft_memcpy(&champ->registre[arene[champ->pc]], &arene[(val + val2) % MEM_SIZE], REG_SIZE);

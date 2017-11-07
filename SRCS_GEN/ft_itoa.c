@@ -6,11 +6,12 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 18:59:39 by jjuret            #+#    #+#             */
-/*   Updated: 2017/10/30 13:21:12 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/07 13:09:31 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "../includes/corewar.h"
 
 static int	isneg(int *target, int *neg)
 {
