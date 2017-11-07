@@ -67,6 +67,7 @@ typedef struct	s_champ
 typedef struct		s_vm
 {
 	int				nbr_cycles;
+	int				winner;
 	t_champ			*champ;
 	unsigned char	*arene;
 }					t_vm;
@@ -77,8 +78,12 @@ void	make_player(t_vm *env, int nbr);
 void	rang(t_vm *env, t_champ *champ);
 void	exec(t_vm *env, t_champ *champ);
 void	exec2(t_vm *env, t_champ *champ, unsigned char commande);
+void	exec3(t_vm *env, t_champ *champ, unsigned char commande);
+void	exec4(t_vm *env, t_champ *champ, unsigned char commande);
+void	exec5(t_vm *env, t_champ *champ, unsigned char commande);
+void	exec6(t_vm *env, t_champ *champ, unsigned char commande);
 int		oct_codage(char target, char place, unsigned char value);
-void	live(unsigned char *arene, t_champ *champ);
+void	live(unsigned char *arene, t_champ *champ, t_vm *env);
 void	ld(unsigned char *arene, t_champ *champ);
 void	st(unsigned char *arene, t_champ *champ);
 void	add(unsigned char *arene, t_champ *champ);

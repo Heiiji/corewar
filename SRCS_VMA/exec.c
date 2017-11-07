@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 10:47:32 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/07 10:11:43 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/07 10:36:11 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	exec(t_vm *env, t_champ *champ)
 	if (commande == 1)
 	{
 		if (champ->action != NULL)
-			live(env->arene, champ);
+			live(env->arene, champ, env);
 		else
 			champ->cycle += 10;
 	}
@@ -73,6 +73,11 @@ void	exec2(t_vm *env, t_champ *champ, unsigned char commande)
 		else
 			champ->cycle += 6;
 	}
+	exec3(env, champ, commande);
+}
+
+void	exec3(t_vm *env, t_champ *champ, unsigned char commande)
+{
 	if (commande == 7)
 	{
 		if (champ->action != NULL)
@@ -94,6 +99,11 @@ void	exec2(t_vm *env, t_champ *champ, unsigned char commande)
 		else
 			champ->cycle += 20;
 	}
+	exec4(env, champ, commande);
+}
+
+void	exec4(t_vm *env, t_champ *champ, unsigned char commande)
+{
 	if (commande == 10)
 	{
 		if (champ->action != NULL)
@@ -115,6 +125,11 @@ void	exec2(t_vm *env, t_champ *champ, unsigned char commande)
 		else
 			champ->cycle += 800;
 	}
+	exec5(env, champ, commande);
+}
+
+void	exec5(t_vm *env, t_champ *champ, unsigned char commande)
+{
 	if (commande == 13)
 	{
 		if (champ->action != NULL)
@@ -129,6 +144,12 @@ void	exec2(t_vm *env, t_champ *champ, unsigned char commande)
 		else
 			champ->cycle += 50;
 	}
+	exec6(env, champ, commande);
+}
+
+void	exec6(t_vm *env, t_champ *champ, unsigned char commande)
+{
+
 	if (commande == 15)
 	{
 		if (champ->action != NULL)
