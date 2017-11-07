@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 12:45:17 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/07 11:18:10 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/07 11:40:25 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,12 @@ void	live(unsigned char *arene, t_champ *champ, t_vm *env)
 {
 	char	*tmp;
 
-	tmp = (char *)malloc(5);
-	ft_memcpy(tmp, &arene[champ->pc], 4);
-	tmp[4] = '\0';
+	tmp = ft_itoa(*((int*)&arene[champ->pc]));
 	ft_put(tmp, 4, 1, 0);
 	ft_put(" is alive !", 11, 1, 0);
 	free(tmp);
+	env->winner = *((int*)&arene[champ->pc]);
 	champ->pc += 4;
-	env->winner = *((int*)tmp);
 }
 
 void	ld(unsigned char *arene, t_champ *champ)

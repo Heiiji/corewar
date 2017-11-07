@@ -17,6 +17,7 @@ SRCS_GEN =	SRCS_GEN/put.c				\
 			SRCS_GEN/get_next_line.c	\
 			SRCS_GEN/malloc_tabtab.c 	\
 			SRCS_GEN/ft_atoi.c			\
+			SRCS_GEN/ft_itoa.c			\
 
 SRCS_VMA  = SRCS_VMA/main.c				\
 			SRCS_VMA/champ_tool.c 		\

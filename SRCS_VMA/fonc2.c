@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 07:51:18 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/07 10:19:20 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/07 12:18:51 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void	and(unsigned char *arene, t_champ *champ)
 	}
 	else if (oct_codage(3,1, ref) == 1)
 	{
-		val = (short)arene[champ->pc];
+		val = *((short*)&arene[champ->pc]);
 		champ->pc += 2;
 	}
 	else
 	{
-		val = (int)arene[champ->pc - 2 + (int)arene[champ->pc % MEM_SIZE]];
+		val = (int)arene[champ->pc - 2 + *((int*)&arene[champ->pc % MEM_SIZE])];
 		champ->pc += 4;
 	}
 	if (oct_codage(1,2, ref) == 1)
@@ -52,12 +52,12 @@ void	and(unsigned char *arene, t_champ *champ)
 	}
 	else if (oct_codage(3,2, ref) == 1)
 	{
-		val2 = (short)arene[champ->pc % MEM_SIZE];
+		val2 = *((short*)(&arene[champ->pc % MEM_SIZE]));
 		champ->pc += 2;
 	}
 	else
 	{
-		val = (int)arene[refn + (int)arene[champ->pc % MEM_SIZE]];
+		val = *((int*)&arene[refn + *((int*)&arene[champ->pc % MEM_SIZE])]);
 		champ->pc += 4;
 	}
 	val = val & val2;
@@ -82,12 +82,12 @@ void	or(unsigned char *arene, t_champ *champ)
 	}
 	else if (oct_codage(3,1, ref) == 1)
 	{
-		val = (short)arene[champ->pc];
+		val = *((short*)&arene[champ->pc]);
 		champ->pc += 2;
 	}
 	else
 	{
-		val = (int)arene[champ->pc - 2 + (int)arene[champ->pc % MEM_SIZE]];
+		val = *((int*)&arene[champ->pc - 2 + *((int*)&arene[champ->pc % MEM_SIZE])]);
 		champ->pc += 4;
 	}
 	if (oct_codage(1,2, ref) == 1)
@@ -97,12 +97,12 @@ void	or(unsigned char *arene, t_champ *champ)
 	}
 	else if (oct_codage(3,2, ref) == 1)
 	{
-		val2 = (short)arene[champ->pc % MEM_SIZE];
+		val2 = *((short*)&arene[champ->pc % MEM_SIZE]);
 		champ->pc += 2;
 	}
 	else
 	{
-		val = (int)arene[refn + (int)arene[champ->pc % MEM_SIZE]];
+		val = *((int*)&arene[refn + *((int*)&arene[champ->pc % MEM_SIZE])]);
 		champ->pc += 4;
 	}
 	val = val | val2;
@@ -332,7 +332,7 @@ void	ft_lfork(unsigned char *arene, t_champ *champ, t_vm *env)
 	t_champ			*new;
 
 	refn = champ->pc - 1;
-	target = (short)arene[champ->pc];
+	target = *((short*)&arene[champ->pc]);
 	new = (t_champ*)malloc(sizeof(t_champ));
 	new->action = NULL;
 	new->next = env->champ;
