@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 10:47:32 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/06 13:13:07 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/07 10:11:43 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,61 @@ void	exec2(t_vm *env, t_champ *champ, unsigned char commande)
 			xor(env->arene, champ);
 		else
 			champ->cycle += 6;
+	}
+	if (commande == 9)
+	{
+		if (champ->action != NULL)
+			zjump(env->arene, champ);
+		else
+			champ->cycle += 20;
+	}
+	if (commande == 10)
+	{
+		if (champ->action != NULL)
+			ldi(env->arene, champ);
+		else
+			champ->cycle += 25;
+	}
+	if (commande == 11)
+	{
+		if (champ->action != NULL)
+			sti(env->arene, champ);
+		else
+			champ->cycle += 25;
+	}
+	if (commande == 12)
+	{
+		if (champ->action != NULL)
+			ft_fork(env->arene, champ, env);
+		else
+			champ->cycle += 800;
+	}
+	if (commande == 13)
+	{
+		if (champ->action != NULL)
+			lld(env->arene, champ);
+		else
+			champ->cycle += 10;
+	}
+	if (commande == 14)
+	{
+		if (champ->action != NULL)
+			lldi(env->arene, champ);
+		else
+			champ->cycle += 50;
+	}
+	if (commande == 15)
+	{
+		if (champ->action != NULL)
+			ft_lfork(env->arene, champ, env);
+		else
+			champ->cycle += 1000;
+	}
+	if (commande == 16)
+	{
+		if (champ->action != NULL)
+			aff(env->arene, champ);
+		else
+			champ->cycle += 2;
 	}
 }
