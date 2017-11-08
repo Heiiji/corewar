@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 12:45:17 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/07 11:40:25 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/08 13:01:20 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	live(unsigned char *arene, t_champ *champ, t_vm *env)
 
 	tmp = ft_itoa(*((int*)&arene[champ->pc]));
 	ft_put(tmp, 4, 1, 0);
-	ft_put(" is alive !", 11, 1, 0);
+	ft_put(" is alive !", 10, 1, 0);
 	free(tmp);
 	env->winner = *((int*)&arene[champ->pc]);
 	champ->pc += 4;

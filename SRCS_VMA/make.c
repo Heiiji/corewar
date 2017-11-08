@@ -6,13 +6,49 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 11:00:13 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/03 09:07:55 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/08 12:21:26 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 
-void	make_player(t_vm *env, int nbr)
+int				magic_check(unsigned int m1, unsigned int m2)
+{
+	unsigned char	*cur1;
+	unsigned char	*cur2;
+
+	cur1 = (unsigned char*)&m1 + 3;
+	cur2 = (unsigned char*)&m2;
+	while (*cur1 == 0)
+		cur1 -= 1;
+	while (*cur2 == 0)
+		cur2 += 1;
+	while (*cur2)
+	{
+		if (*cur1 != *cur2)
+			return (-1);
+		cur1 -= 1;
+		cur2 += 1;
+	}
+	return (0);
+}
+
+unsigned int	inv_uint(unsigned int target)
+{
+	char	*cur;
+	char	tmp;
+
+	cur = (char*)&target;
+	tmp = cur[3];
+	cur[3] = cur[0];
+	cur[0] = tmp;
+	tmp = cur[2];
+	cur[2] = cur[1];
+	cur[1] = tmp;
+	return (target);
+}
+
+void			make_player(t_vm *env, int nbr)
 {
 	int		max_size;
 	int		cur;
@@ -26,15 +62,26 @@ void	make_player(t_vm *env, int nbr)
 	{
 		if (read(champ->fd, &champ->head, sizeof(t_header)) <= 0)
 			ft_vm_error("ERROR: incorect file\n");
-		if (COREWAR_EXEC_MAGIC != champ->head.magic)
+		if (magic_check(COREWAR_EXEC_MAGIC, champ->head.magic) != 0)
 			ft_vm_error("ERROR: incorect magic number\n");
+		champ->head.prog_size = inv_uint(champ->head.prog_size);
 		if (read(champ->fd, &env->arene[cur * max_size], champ->head.prog_size + 1) != champ->head.prog_size)
 			ft_vm_error("ERROR: incorect file\n");
 		champ->pc = cur * max_size;
+		printf("Joueur n°%d\n", cur);
+		printf("id n°%d\n", champ->id);
+		printf("Magic : %x\n", champ->head.magic);
+		printf("Name : %s\n", champ->head.prog_name);
+		printf("Size : %u\n", champ->head.prog_size);
+		printf("Comment : %s\n\n", champ->head.comment);
 		cur ++;
 		champ = champ->next;
 	}
 }
+
+/*
+** Construction de l'arene et check des joueurs (pour la securités)
+*/
 
 void	make_arene(t_vm *env)
 {
@@ -49,5 +96,6 @@ void	make_arene(t_vm *env)
 		cur = cur->next;
 		nbr++;
 	}
+	printf("Nombre de joueurs : %d\n\n", nbr);
 	make_player(env, nbr);
 }
