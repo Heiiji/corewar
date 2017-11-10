@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 07:51:18 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/10 11:23:42 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/10 12:37:58 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,7 @@ void	ldi(unsigned char *arene, t_champ *champ)
 		val2 = *((short*)&arene[(refn + (val2 % IDX_MOD)) % MEM_SIZE]);
 		champ->pc += 2;
 	}
-	ft_memcpy(&champ->registre[arene[champ->pc]], &arene[(val + val2) % MEM_SIZE], REG_SIZE);
+	ft_memcpy(&champ->registre[(arene[champ->pc] % REG_NUMBER) * REG_SIZE], &arene[(val + val2) % MEM_SIZE], REG_SIZE);
 	champ->pc += 1;
 }
 

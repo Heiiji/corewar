@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/10 10:59:31 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/10 12:10:26 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	crawler(t_vm *env)
 	{
 		activity = 0;
 		champ = env->champ;
-		printf("\n\nCycle : %llu/%u\n", cycle, CYCLE_TO_DIE);
+		printf("\nCycle : %llu/%u\n", cycle, CYCLE_TO_DIE);
 		while (champ && cycle == champ->cycle)
 		{
 			activity += 1;
