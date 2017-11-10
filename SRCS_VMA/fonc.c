@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 12:45:17 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/10 10:50:13 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/10 11:21:10 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,7 @@ void	ld(unsigned char *arene, t_champ *champ)
 		champ->pc += 1;
 		val2 = (short*)&arene[champ->pc];
 		champ->pc += 2;
-		ft_memcpy(&champ->registre[arene[champ->pc]], &arene[(ref + (*val2 % IDX_MOD)) % MEM_SIZE], REG_SIZE);
-		champ->pc += 1;
+		ft_memcpy(&champ->registre[REG_SIZE * arene[champ->pc]], &arene[(ref + (*val2 % IDX_MOD)) % MEM_SIZE], REG_SIZE);
 	}
 	else
 	{
@@ -76,8 +75,8 @@ void	ld(unsigned char *arene, t_champ *champ)
 		val = (int*)&arene[(ref + *val) % MEM_SIZE];
 		champ->pc += 4;
 		ft_memcpy(&champ->registre[arene[champ->pc]], &arene[(ref + (*val % IDX_MOD)) % MEM_SIZE], REG_SIZE);
-		champ->pc += 1;
 	}
+	champ->pc += 1;
 }
 
 void	st(unsigned char *arene, t_champ *champ)

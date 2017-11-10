@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 07:51:18 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/08 09:14:06 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/10 11:23:42 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,7 +236,7 @@ void	sti(unsigned char *arene, t_champ *champ)
 	else
 	{
 		ft_memcpy(&(arene[(add + *((int*)&arene[champ->pc])) % MEM_SIZE]), &champ->registre[reg * REG_SIZE], REG_SIZE);
-		champ->pc += 2;
+		champ->pc += 4;
 	}
 }
 
