@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 10:47:32 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/08 13:07:23 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/10 11:05:39 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	exec(t_vm *env, t_champ *champ)
 			live(env->arene, champ, env);
 		else
 			champ->cycle += 10;
-	}/*
+	}
 	if (commande == 2)
 	{
 		if (champ->action != NULL)
@@ -40,18 +40,18 @@ void	exec(t_vm *env, t_champ *champ)
 		else
 			champ->cycle += 5;
 	}
-	exec2(env, champ, commande);*/
-	if  (commande > 1)
-	{
+	exec2(env, champ, commande);
+	if (commande > 16 || commande == 0 || champ->action != NULL)
 		champ->cycle += 1;
-		champ->action = NULL;
-	}
-	if (champ->action == NULL && commande <= 1)
+	if (champ->action == NULL && commande <= 16 && commande != 0)
 	{
 		champ->pc -= 1;
 		champ->action = &env->arene[champ->pc];
-		rang(env, env->champ);
 	}
+	else
+		if (champ->action != NULL)
+			champ->action = NULL;
+	rang(env, env->champ);
 }
 
 void	exec2(t_vm *env, t_champ *champ, unsigned char commande)

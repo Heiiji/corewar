@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 15:02:08 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/08 13:11:34 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/10 11:02:36 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	rang(t_vm *env, t_champ *champ)
 
 	prev = champ;
 	cur = champ->next;
-	if (!champ->next || !cur)
+	if (!cur || !prev)
 		return ;
 	if (cur->cycle >= champ->cycle)
 		return ;
@@ -29,11 +29,18 @@ void	rang(t_vm *env, t_champ *champ)
 		cur = cur->next;
 	}
 	env->champ = champ->next;
-	champ->next = cur->next;
-	if (!cur->next)
+	printf("champ : %u, cur : %u, env : %u\n", champ->id, cur->id, env->champ->id);
+	if (cur->cycle < champ->cycle)
+	{
+		champ->next = cur->next;
 		cur->next = champ;
-	if (prev->next != champ)
-		prev->next = champ;
+	}
+	else
+	{
+		champ->next = cur;
+		if (prev != champ)
+			prev->next = champ;
+	}
 }
 
 t_champ	*find_by_id(t_vm *env, int id)

@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/08 13:02:56 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/10 10:59:31 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,18 @@ void	crawler(t_vm *env)
 	{
 		activity = 0;
 		champ = env->champ;
+		printf("\n\nCycle : %llu/%u\n", cycle, CYCLE_TO_DIE);
 		while (champ && cycle == champ->cycle)
 		{
 			activity += 1;
-			printf("Champion |%d| cycle |%llu| pc |%llu|\n", champ->id, champ->cycle, champ->pc);
-			exec(env, env->champ);
-			champ = champ->next;
-			sleep(1);
+			printf("Champion |%d| pc |%llu|\n", champ->id, champ->pc);
+			exec(env, champ);
+			if (champ->next)
+				champ = champ->next;
+			else
+				champ = env->champ;
 		}
+		sleep(1);
 		cycle += 1;
 		// parse(env, activity);
 	}
@@ -92,8 +96,6 @@ int main(int ac, char **av)
 		ft_memset(champ->registre, 0, REG_SIZE * REG_NUMBER);
 		if (!(champ->next = (t_champ*)malloc(sizeof(t_champ))))
 			ft_vm_error("Erreur de malloc sur les champions\n");
-		printf("champ->id = %d\n", champ->id);
-		printf("champ->fd = %d\n", champ->fd);
 		cur++;
 	}
 	printf("\n");
