@@ -59,7 +59,7 @@ void	crawler(t_vm *env)
 			else
 				champ = env->champ;
 		}
-		sleep(1);
+		usleep(500000);
 		cycle += 1;
 		// parse(env, activity);
 	}
