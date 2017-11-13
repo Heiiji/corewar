@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 12:45:17 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/10 11:21:10 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/13 12:48:37 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,33 @@
 
 int		oct_codage(char target, char place, unsigned char value)
 {
+	printf("%u\n", value);
 	if (value >= 192 && target == 3 && place == 1)
 		return (1);
 	if (value >= 128 && target == 2 && place == 1)
 		return (1);
-	value -= 128;
+	if (value >= 128)
+		value -= 128;
 	if (value >= 64 && target == 1 && place == 1)
 		return (1);
-	value -= 64;
+	if (value >= 64)
+		value -= 64;
 	if (value >= 48 && target == 3 && place == 2)
 		return (1);
 	if (value >= 32 && target == 2 && place == 2)
 		return (1);
-	value -= 32;
+	if (value >= 32)
+		value -= 32;
 	if (value >= 16 && target == 1 && place == 2)
 		return (1);
-	value -= 16;
+	if (value >= 16)
+		value -= 16;
 	if (value >= 12 && target == 3 && place == 3)
 		return (1);
 	if (value >= 8 && target == 2 && place == 3)
 		return (1);
-	value -= 8;
+	if (value >= 8)
+		value -= 8;
 	if (value >= 4 && target == 1 && place == 3)
 		return (1);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 07:51:18 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/10 12:37:58 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/13 13:13:16 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,8 +208,8 @@ void	sti(unsigned char *arene, t_champ *champ)
 {
 	long			refn;
 	unsigned char	ref;
-	long			reg;
-	int				add;
+	unsigned char	reg;
+	unsigned char	add;
 
 	ref = arene[champ->pc];
 	refn = champ->pc - 1;
@@ -218,25 +218,25 @@ void	sti(unsigned char *arene, t_champ *champ)
 	champ->pc += 1;
 	if (oct_codage(1,2, ref) == 1)
 	{
-		add = champ->registre[arene[champ->pc % MEM_SIZE]];
+		add = champ->registre[arene[champ->pc % MEM_SIZE] % (REG_NUMBER * REG_SIZE)];
 		champ->pc += 1;
 	}
 	else
 	{
 		add = (short)arene[champ->pc % MEM_SIZE];
 		if (oct_codage(2,2, ref) == 1)
-			add = (short)arene[(refn + add) % MEM_SIZE];
+			add = *((short*)&arene[(refn + add) % MEM_SIZE]);
 		champ->pc += 2;
 	}
 	if (oct_codage(1,3, ref) == 1)
 	{
-		ft_memcpy(&(arene[(add + *((int*)&champ->registre[arene[champ->pc % MEM_SIZE]])) % MEM_SIZE]), &champ->registre[reg * REG_SIZE], REG_SIZE);
+		ft_memcpy(&(arene[(add + *((short*)&champ->registre[arene[champ->pc % MEM_SIZE]])) % MEM_SIZE]), &champ->registre[reg * REG_SIZE], REG_SIZE);
 		champ->pc += 1;
 	}
 	else
 	{
-		ft_memcpy(&(arene[(add + *((int*)&arene[champ->pc])) % MEM_SIZE]), &champ->registre[reg * REG_SIZE], REG_SIZE);
-		champ->pc += 4;
+		ft_memcpy(&(arene[(add + *((short*)&arene[champ->pc]) + refn) % MEM_SIZE]), &champ->registre[reg * REG_SIZE], REG_SIZE);
+		champ->pc += 2;
 	}
 }
 
