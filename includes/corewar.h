@@ -82,6 +82,8 @@ void	exec3(t_vm *env, t_champ *champ, unsigned char commande);
 void	exec4(t_vm *env, t_champ *champ, unsigned char commande);
 void	exec5(t_vm *env, t_champ *champ, unsigned char commande);
 void	exec6(t_vm *env, t_champ *champ, unsigned char commande);
+short	get_short(unsigned char *read);
+int		get_int(unsigned char *read);
 int		oct_codage(char target, char place, unsigned char value);
 void	live(unsigned char *arene, t_champ *champ, t_vm *env);
 void	ld(unsigned char *arene, t_champ *champ);

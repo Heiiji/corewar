@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 12:45:17 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/13 13:31:34 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/14 11:43:57 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,12 @@ void	live(unsigned char *arene, t_champ *champ, t_vm *env)
 {
 	char	*tmp;
 
-	tmp = ft_itoa(*((int*)&arene[champ->pc]));
+	tmp = ft_itoa(get_int(&arene[champ->pc]));
 	ft_put(tmp, 4, 1, 0);
 	ft_put(" is alive !", 10, 1, 0);
 	free(tmp);
-	env->winner = *((int*)&arene[champ->pc]);
+	env->winner = get_int(&arene[champ->pc]);
+	champ->carry = 1;
 	champ->pc += 4;
 }
 
@@ -62,16 +63,16 @@ void	ld(unsigned char *arene, t_champ *champ)
 	unsigned char		value;
 	unsigned char		*elem;
 	int					*val;
-	short				*val2;
+	short				val2;
 	unsigned long long	ref;
 
 	ref = champ->pc - 1;
 	if (oct_codage(3, 1, arene[champ->pc]) == 1)
 	{
 		champ->pc += 1;
-		val2 = (short*)&arene[champ->pc];
+		val2 = get_short(&arene[champ->pc]);
 		champ->pc += 2;
-		ft_memcpy(&champ->registre[REG_SIZE * arene[champ->pc]], &arene[(ref + (*val2 % IDX_MOD)) % MEM_SIZE], REG_SIZE);
+		ft_memcpy(&champ->registre[REG_SIZE * arene[champ->pc]], &arene[(ref + (val2 % IDX_MOD)) % MEM_SIZE], REG_SIZE);
 	}
 	else
 	{
@@ -93,9 +94,9 @@ void	st(unsigned char *arene, t_champ *champ)
 	{
 		champ->pc += 1;
 		elem = &arene[champ->pc];
-		reg = &champ->registre[(REG_SIZE * *((int*)elem)) % (REG_SIZE * REG_NUMBER)];
+		reg = &champ->registre[(REG_SIZE * *elem) % (REG_SIZE * REG_NUMBER)];
 		champ->pc += 1;
-		ft_memcpy(&champ->registre[(REG_SIZE * *((int*)elem + 1)) % (REG_SIZE * REG_NUMBER)], reg, REG_SIZE);
+		ft_memcpy(&champ->registre[(REG_SIZE * *elem + 1) % (REG_SIZE * REG_NUMBER)], reg, REG_SIZE);
 	}
 	else
 	{
@@ -103,7 +104,7 @@ void	st(unsigned char *arene, t_champ *champ)
 		reg = &champ->registre[(REG_SIZE * champ->pc) % (REG_SIZE * REG_NUMBER)];
 		champ->pc += 1;
 		elem = ft_memdup(&arene[champ->pc], 2);
-		ft_memcpy(&champ->registre[(REG_SIZE * *(short*)elem) % (REG_SIZE * REG_NUMBER)], reg, REG_SIZE);
+		ft_memcpy(&champ->registre[(REG_SIZE * get_short(elem)) % (REG_SIZE * REG_NUMBER)], reg, REG_SIZE);
 		champ->pc += 2;
 		free(elem);
 	}

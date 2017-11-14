@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 15:02:08 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/10 12:09:53 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/14 10:47:11 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,24 @@ t_champ	*find_by_id(t_vm *env, int id)
 		cur = cur->next;
 	}
 	return (NULL);
+}
+
+short		get_short(unsigned char *read)
+{
+	unsigned char tmp[2];
+
+	tmp[0] = *(read + 1);
+	tmp[1] = *read;
+	return (*((short*)(&tmp[0])));
+}
+
+int		get_int(unsigned char *read)
+{
+	unsigned char tmp[4];
+
+	tmp[0] = *(read + 3);
+	tmp[1] = *(read + 2);
+	tmp[2] = *(read + 1);
+	tmp[3] = *read;
+	return (*((int*)(&tmp[0])));
 }
