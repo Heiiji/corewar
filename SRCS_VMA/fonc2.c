@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 07:51:18 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/14 11:38:25 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/14 13:25:28 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ void	and(unsigned char *arene, t_champ *champ)
 	}
 	else if (oct_codage(3,2, ref) == 1)
 	{
-		val2 = *((short*)(&arene[champ->pc % MEM_SIZE]));
+		val2 = get_short(&arene[champ->pc % MEM_SIZE]);
 		champ->pc += 2;
 	}
 	else
 	{
-		val2 = *((int*)&arene[refn + *((int*)&arene[champ->pc % MEM_SIZE])]);
+		val2 = get_int(&arene[refn + get_int(&arene[champ->pc % MEM_SIZE])]);
 		champ->pc += 4;
 	}
 	val = val & val2;
@@ -103,7 +103,7 @@ void	or(unsigned char *arene, t_champ *champ)
 	}
 	else
 	{
-		val = *((int*)&arene[refn + *((int*)&arene[champ->pc % MEM_SIZE])]);
+		val = get_int(&arene[refn + get_int(&arene[champ->pc % MEM_SIZE])]);
 		champ->pc += 4;
 	}
 	val = val | val2;
@@ -128,12 +128,12 @@ void	xor(unsigned char *arene, t_champ *champ)
 	}
 	else if (oct_codage(3,1, ref) == 1)
 	{
-		val = *((short*)&arene[champ->pc]);
+		val = get_short(&arene[champ->pc]);
 		champ->pc += 2;
 	}
 	else
 	{
-		val = *((int*)&arene[champ->pc - 2 + *((int*)&arene[champ->pc % MEM_SIZE])]);
+		val = get_int(&arene[champ->pc - 2 + get_int(&arene[champ->pc % MEM_SIZE])]);
 		champ->pc += 4;
 	}
 	if (oct_codage(1,2, ref) == 1)
@@ -143,12 +143,12 @@ void	xor(unsigned char *arene, t_champ *champ)
 	}
 	else if (oct_codage(3,2, ref) == 1)
 	{
-		val2 = *((short*)&arene[champ->pc % MEM_SIZE]);
+		val2 = get_short(&arene[champ->pc % MEM_SIZE]);
 		champ->pc += 2;
 	}
 	else
 	{
-		val = *((int*)&arene[refn + *((int*)&arene[champ->pc % MEM_SIZE])]);
+		val = get_int(&arene[refn + get_int(&arene[champ->pc % MEM_SIZE])]);
 		champ->pc += 4;
 	}
 	val = val ^ val2;
@@ -196,8 +196,8 @@ void	ldi(unsigned char *arene, t_champ *champ)
 	}
 	else
 	{
-		val2 = *((short*)&champ->registre[arene[champ->pc % MEM_SIZE]]);
-		val2 = *((short*)&arene[(refn + (val2 % IDX_MOD)) % MEM_SIZE]);
+		val2 = get_short(&champ->registre[arene[champ->pc % MEM_SIZE]]);
+		val2 = get_short(&arene[(refn + (val2 % IDX_MOD)) % MEM_SIZE]);
 		champ->pc += 2;
 	}
 	ft_memcpy(&champ->registre[(arene[champ->pc] % REG_NUMBER) * REG_SIZE], &arene[(val + val2) % MEM_SIZE], REG_SIZE);
