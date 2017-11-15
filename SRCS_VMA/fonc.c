@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 12:45:17 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/14 12:27:56 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/15 11:39:48 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ld(unsigned char *arene, t_champ *champ)
 {
 	unsigned char		value;
 	unsigned char		*elem;
-	int					*val;
+	int					val;
 	short				val2;
 	unsigned long long	ref;
 
@@ -77,11 +77,12 @@ void	ld(unsigned char *arene, t_champ *champ)
 	else
 	{
 		champ->pc += 1;
-		val = (int*)&arene[champ->pc];
-		val = (int*)&arene[(ref + *val) % MEM_SIZE];
+		val = get_int(&arene[champ->pc]);
+		val = get_int(&arene[(ref + val) % MEM_SIZE]);
 		champ->pc += 4;
-		ft_memcpy(&champ->registre[arene[champ->pc]], &arene[(ref + (*val % IDX_MOD)) % MEM_SIZE], REG_SIZE);
+		ft_memcpy(&champ->registre[arene[champ->pc]], &arene[(ref + (val % IDX_MOD)) % MEM_SIZE], REG_SIZE);
 	}
+	champ->carry = 1;
 	champ->pc += 1;
 }
 
@@ -115,7 +116,7 @@ void	st(unsigned char *arene, t_champ *champ)
 void	add(unsigned char *arene, t_champ *champ)
 {
 	champ->pc += 1;
-	champ->registre[arene[champ->pc + 2]] = champ->registre[arene[champ->pc + 1]] + champ->registre[arene[champ->pc]];
+	champ->registre[arene[champ->pc + 2]] = champ->registre[arene[champ->pc + 1] * REG_SIZE] + champ->registre[arene[champ->pc] * REG_SIZE];
 	champ->carry = 1;
 	champ->pc += 3;
 }

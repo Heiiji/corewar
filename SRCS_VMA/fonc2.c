@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 07:51:18 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/14 13:25:28 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/15 11:40:29 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ void	zjump(unsigned char *arene, t_champ *champ)
 		champ->pc = champ->pc - 1 + value;
 	else
 		champ->pc += 2;
+	champ->carry = 1;
 }
 
 void	ldi(unsigned char *arene, t_champ *champ)
@@ -228,7 +229,7 @@ void	sti(unsigned char *arene, t_champ *champ)
 	}
 	if (oct_codage(1,3, ref) == 1)
 	{
-		ft_memcpy(&(arene[(add + *((short*)&champ->registre[arene[champ->pc % MEM_SIZE]])) % MEM_SIZE]), &champ->registre[reg * REG_SIZE], REG_SIZE);
+		ft_memcpy(&(arene[(add + get_short(&champ->registre[arene[champ->pc % MEM_SIZE]])) % MEM_SIZE]), &champ->registre[reg * REG_SIZE], REG_SIZE);
 		champ->pc += 1;
 	}
 	else
@@ -271,7 +272,7 @@ void	lld(unsigned char *arene, t_champ *champ)
 	if (oct_codage(3, 1, arene[champ->pc]) == 1)
 	{
 		champ->pc += 1;
-		val2 = *((short*)&arene[champ->pc]);
+		val2 = get_short(&arene[champ->pc]);
 		champ->pc += 2;
 		ft_memcpy(&champ->registre[arene[champ->pc]], &arene[(ref + val2) % MEM_SIZE], REG_SIZE);
 		champ->pc += 1;
@@ -285,6 +286,7 @@ void	lld(unsigned char *arene, t_champ *champ)
 		ft_memcpy(&champ->registre[arene[champ->pc]], &arene[(ref + val) % MEM_SIZE], REG_SIZE);
 		champ->pc += 1;
 	}
+	champ->carry = 1;
 }
 
 void	lldi(unsigned char *arene, t_champ *champ)
