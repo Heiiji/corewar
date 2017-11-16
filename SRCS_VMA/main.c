@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/14 10:51:04 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/16 16:39:22 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,11 @@ void	crawler(t_vm *env)
 			else
 				champ = env->champ;
 		}
-		usleep(450000);
+		usleep(440000);
 		cycle += 1;
-		// parse(env, activity);
+		//parse(env, activity);
+		if (cycle >= CYCLE_TO_DIE)
+			cycle = check_live(env);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 07:51:18 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/15 11:40:29 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/16 14:22:40 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ void	zjump(unsigned char *arene, t_champ *champ)
 		champ->pc = champ->pc - 1 + value;
 	else
 		champ->pc += 2;
-	champ->carry = 1;
+	champ->carry = champ->carry * -1;
 }
 
 void	ldi(unsigned char *arene, t_champ *champ)
@@ -286,7 +286,7 @@ void	lld(unsigned char *arene, t_champ *champ)
 		ft_memcpy(&champ->registre[arene[champ->pc]], &arene[(ref + val) % MEM_SIZE], REG_SIZE);
 		champ->pc += 1;
 	}
-	champ->carry = 1;
+	champ->carry = champ->carry * -1;
 }
 
 void	lldi(unsigned char *arene, t_champ *champ)

@@ -60,6 +60,7 @@ typedef struct	s_champ
 	unsigned long long	cycle;
 	unsigned long long	pc;
   	char      			carry;
+  	char      			live;
   	unsigned char		registre[REG_SIZE * REG_NUMBER];
 	struct s_champ		*next;
 }					t_champ;
@@ -73,6 +74,7 @@ typedef struct		s_vm
 }					t_vm;
 
 void	ft_vm_error(char *error);
+long	check_live(t_vm *env);
 void	make_arene(t_vm *env);
 void	make_player(t_vm *env, int nbr);
 void	rang(t_vm *env, t_champ *champ);

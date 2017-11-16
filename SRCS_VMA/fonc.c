@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 12:45:17 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/15 11:39:48 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/16 16:08:35 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	live(unsigned char *arene, t_champ *champ, t_vm *env)
 	ft_put(" is alive !", 10, 1, 0);
 	free(tmp);
 	env->winner = get_int(&arene[champ->pc]);
-	champ->carry = 1;
+	champ->carry = champ->carry * -1;
+	champ->live = 1;
 	champ->pc += 4;
 }
 
@@ -109,7 +110,7 @@ void	st(unsigned char *arene, t_champ *champ)
 		champ->pc += 2;
 		free(elem);
 	}
-	champ->carry = 1;
+	champ->carry = champ->carry * -1;
 	champ->pc += 1;
 }
 
@@ -117,6 +118,6 @@ void	add(unsigned char *arene, t_champ *champ)
 {
 	champ->pc += 1;
 	champ->registre[arene[champ->pc + 2]] = champ->registre[arene[champ->pc + 1] * REG_SIZE] + champ->registre[arene[champ->pc] * REG_SIZE];
-	champ->carry = 1;
+	champ->carry = champ->carry * -1;
 	champ->pc += 3;
 }
