@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 11:00:13 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/14 10:58:11 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/17 10:43:10 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void			make_player(t_vm *env, int nbr)
 		if (magic_check(COREWAR_EXEC_MAGIC, champ->head.magic) != 0)
 			ft_vm_error("ERROR: incorect magic number\n");
 		champ->head.prog_size = inv_uint(champ->head.prog_size);
-		if (read(champ->fd, &env->arene[cur * max_size], champ->head.prog_size + 1) != champ->head.prog_size)
+		if (read(champ->fd, &env->arene[cur * max_size], champ->head.prog_size + 5) != champ->head.prog_size)
 			ft_vm_error("ERROR: incorect file\n");
 		champ->pc = cur * max_size;
 		nbr = get_int((unsigned char*)&champ->id);

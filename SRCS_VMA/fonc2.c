@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 07:51:18 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/16 14:22:40 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/17 11:13:36 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	sub(unsigned char *arene, t_champ *champ)
 	champ->pc += 1;
 	champ->registre[arene[champ->pc + 2]] = champ->registre[arene[champ->pc + 1\
 	]] - champ->registre[arene[champ->pc]];
-	champ->carry = 1;
+	champ->carry = (champ->carry == 1) ? 0 : 1;
 	champ->pc += 3;
 }
 
@@ -62,7 +62,7 @@ void	and(unsigned char *arene, t_champ *champ)
 		champ->pc += 4;
 	}
 	val = val & val2;
-	memcpy(&(champ->registre[REG_SIZE * arene[champ->pc % MEM_SIZE]]), (char*)(&val), 4);
+	memcpy(&(champ->registre[REG_SIZE * arene[champ->pc % MEM_SIZE]]), (unsigned char*)(&val), 4);
 	champ->pc += 1;
 }
 
@@ -234,7 +234,7 @@ void	sti(unsigned char *arene, t_champ *champ)
 	}
 	else
 	{
-		ft_memcpy(&(arene[(add + get_short(&arene[champ->pc]) + refn) % MEM_SIZE]), &champ->registre[reg * REG_SIZE], REG_SIZE);
+		ft_memcpy(&(arene[(add + get_short(&arene[champ->pc % MEM_SIZE]) + refn) % MEM_SIZE]), &champ->registre[reg * REG_SIZE], REG_SIZE);
 		champ->pc += 2;
 	}
 }
@@ -286,7 +286,7 @@ void	lld(unsigned char *arene, t_champ *champ)
 		ft_memcpy(&champ->registre[arene[champ->pc]], &arene[(ref + val) % MEM_SIZE], REG_SIZE);
 		champ->pc += 1;
 	}
-	champ->carry = champ->carry * -1;
+	champ->carry = (champ->carry == 1) ? 0 : 1;
 }
 
 void	lldi(unsigned char *arene, t_champ *champ)

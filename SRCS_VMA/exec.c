@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 10:47:32 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/10 11:05:39 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/17 10:29:10 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,6 @@ void	exec(t_vm *env, t_champ *champ)
 			live(env->arene, champ, env);
 		else
 			champ->cycle += 10;
-	}
-	if (commande == 2)
-	{
-		if (champ->action != NULL)
-			ld(env->arene, champ);
-		else
-			champ->cycle += 5;
-	}
-	if (commande == 3)
-	{
-		if (champ->action != NULL)
-			st(env->arene, champ);
-		else
-			champ->cycle += 5;
 	}
 	exec2(env, champ, commande);
 	if (commande > 16 || commande == 0 || champ->action != NULL)
@@ -148,6 +134,13 @@ void	exec5(t_vm *env, t_champ *champ, unsigned char commande)
 		else
 			champ->cycle += 50;
 	}
+	if (commande == 3)
+	{
+		if (champ->action != NULL)
+			st(env->arene, champ);
+		else
+			champ->cycle += 5;
+	}
 	exec6(env, champ, commande);
 }
 
@@ -167,5 +160,12 @@ void	exec6(t_vm *env, t_champ *champ, unsigned char commande)
 			aff(env->arene, champ);
 		else
 			champ->cycle += 2;
+	}
+	if (commande == 2)
+	{
+		if (champ->action != NULL)
+			ld(env->arene, champ);
+		else
+			champ->cycle += 5;
 	}
 }
