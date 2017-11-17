@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 15:02:08 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/16 16:39:57 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/17 15:47:45 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ long	check_live(t_vm *env)
 	{
 		if (cur->live != 1)
 		{
-			if (cur->action)
-				free(cur->action);
 			if (prev)
 				prev->next = cur->next;
 			else
@@ -103,7 +101,8 @@ long	check_live(t_vm *env)
 		cur = cur->next;
 	}
 	if (!env->champ)
-		if (!env->champ->next)
-			return(CYCLE_TO_DIE);
-	return (0);
+		return (0);
+	if (!env->champ->next)
+		return (0);
+	return(CYCLE_TO_DIE);
 }

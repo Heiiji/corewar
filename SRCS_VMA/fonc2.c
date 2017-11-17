@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 07:51:18 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/17 11:13:36 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/17 15:36:01 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,7 @@ void	ft_fork(unsigned char *arene, t_champ *champ, t_vm *env)
 	new->carry = champ->carry;
 	new->cycle = champ->cycle;
 	new->head = champ->head;
+	env->champ = new;
 	rang(env, new);
 	champ->pc += 2;
 }

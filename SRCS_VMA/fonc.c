@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 12:45:17 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/17 10:42:59 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/17 15:49:32 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void	live(unsigned char *arene, t_champ *champ, t_vm *env)
 	free(tmp);
 	env->winner = get_int(&arene[champ->pc]);
 	champ->carry = (champ->carry == 1) ? 0 : 1;
-	champ->live = 1;
+	if (get_int(&arene[champ->pc]) == champ->id)
+		champ->live = 1;
 	champ->pc += 4;
 }
 

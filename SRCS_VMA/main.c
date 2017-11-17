@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/16 16:39:22 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/17 15:40:16 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,33 @@ void	crawler(t_vm *env)
 	t_champ				*champ;
 	int					activity;
 	unsigned long long	cycle;
+	unsigned long long	maxcycle;
 
 	cycle = 0;
-	while (cycle < CYCLE_TO_DIE)
+	maxcycle = CYCLE_TO_DIE;
+	while (cycle < maxcycle)
 	{
 		activity = 0;
 		champ = env->champ;
-		printf("\nCycle : %llu/%u\n", cycle, CYCLE_TO_DIE);
-		while (champ && cycle == champ->cycle)
+		while (champ && cycle >= champ->cycle)
 		{
+			printf("\nCycle : %llu/%llu\n", cycle, maxcycle);
 			activity += 1;
 			printf("Champion |%d| pc |%llu|\n", champ->id, champ->pc);
+			printf("forward |%x|%x|%x|%x|%x|%x|%x|%x|%x|%x|\n", (int)env->arene[champ->pc], (int)env->arene[champ->pc + 1], (int)env->arene[champ->pc + 2], (int)env->arene[champ->pc + 3], (int)env->arene[champ->pc + 4], (int)env->arene[champ->pc + 5], (int)env->arene[champ->pc + 6], (int)env->arene[champ->pc + 7], (int)env->arene[champ->pc + 8], (int)env->arene[champ->pc + 9]);
 			exec(env, champ);
 			if (champ->next)
 				champ = champ->next;
 			else
 				champ = env->champ;
+			if (champ->cycle >= cycle && env->champ->cycle <= cycle)
+				champ = env->champ;
+			usleep(800000);
 		}
-		usleep(440000);
 		cycle += 1;
 		//parse(env, activity);
-		if (cycle >= CYCLE_TO_DIE)
-			cycle = check_live(env);
+		if (cycle >= maxcycle)
+			maxcycle += check_live(env);
 	}
 }
 
