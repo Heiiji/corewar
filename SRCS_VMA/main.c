@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/20 10:10:55 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/20 12:34:07 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	crawler(t_vm *env)
 				champ = env->champ;
 			if (champ->cycle >= cycle && env->champ->cycle <= cycle)
 				champ = env->champ;
-			usleep(800000);
+			usleep(790000);
 		}
 		cycle += 1;
 		//parse(env, activity);
@@ -105,10 +105,11 @@ int main(int ac, char **av)
 			ft_vm_error("Erreur de malloc sur les champions\n");
 		cur++;
 	}
-	printf("\n");
 	free (champ->next);
 	champ->next = NULL;
 	make_arene(&env);
 	crawler(&env);
+	ft_put(champ->head.prog_name, ft_strlen(champ->head.prog_name) - 1, 1, 0);
+	ft_put(" Win !\n", 7, 1, 0);
 	return (0);
 }
