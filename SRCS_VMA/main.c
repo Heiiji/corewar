@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/17 15:40:16 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/20 10:10:55 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	crawler(t_vm *env)
 			printf("\nCycle : %llu/%llu\n", cycle, maxcycle);
 			activity += 1;
 			printf("Champion |%d| pc |%llu|\n", champ->id, champ->pc);
-			printf("forward |%x|%x|%x|%x|%x|%x|%x|%x|%x|%x|\n", (int)env->arene[champ->pc], (int)env->arene[champ->pc + 1], (int)env->arene[champ->pc + 2], (int)env->arene[champ->pc + 3], (int)env->arene[champ->pc + 4], (int)env->arene[champ->pc + 5], (int)env->arene[champ->pc + 6], (int)env->arene[champ->pc + 7], (int)env->arene[champ->pc + 8], (int)env->arene[champ->pc + 9]);
+			printf("forward |%x|%x|%x|%x|%x|%x|%x|%x|%x|%x|%x|\n", (int)env->arene[champ->pc], (int)env->arene[champ->pc + 1], (int)env->arene[champ->pc + 2], (int)env->arene[champ->pc + 3], (int)env->arene[champ->pc + 4], (int)env->arene[champ->pc + 5], (int)env->arene[champ->pc + 6], (int)env->arene[champ->pc + 7], (int)env->arene[champ->pc + 8], (int)env->arene[champ->pc + 9], (int)env->arene[champ->pc + 10]);
 			exec(env, champ);
 			if (champ->next)
 				champ = champ->next;

@@ -21,6 +21,7 @@ SRCS_GEN =	SRCS_GEN/put.c				\
 
 SRCS_VMA  = SRCS_VMA/main.c				\
 			SRCS_VMA/champ_tool.c 		\
+			SRCS_VMA/live_tool.c 		\
 			SRCS_VMA/make.c 			\
 			SRCS_VMA/exec.c 			\
 			SRCS_VMA/fonc.c 			\

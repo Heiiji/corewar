@@ -78,6 +78,7 @@ long	check_live(t_vm *env);
 void	make_arene(t_vm *env);
 void	make_player(t_vm *env, int nbr);
 void	rang(t_vm *env, t_champ *champ);
+void	give_live(t_champ *champ, int id);
 void	exec(t_vm *env, t_champ *champ);
 void	exec2(t_vm *env, t_champ *champ, unsigned char commande);
 void	exec3(t_vm *env, t_champ *champ, unsigned char commande);

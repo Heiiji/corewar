@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 15:02:08 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/17 15:47:45 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/20 10:01:33 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,35 +74,4 @@ int		get_int(unsigned char *read)
 	tmp[2] = *(read + 1);
 	tmp[3] = *read;
 	return (*((int*)(&tmp[0])));
-}
-
-long	check_live(t_vm *env)
-{
-	t_champ	*cur;
-	t_champ *prev;
-
-	cur = env->champ;
-	prev = NULL;
-	while (cur)
-	{
-		if (cur->live != 1)
-		{
-			if (prev)
-				prev->next = cur->next;
-			else
-			{
-				prev = cur->next;
-				env->champ = prev;
-			}
-			free(cur);
-			cur = prev;
-		}
-		prev = cur;
-		cur = cur->next;
-	}
-	if (!env->champ)
-		return (0);
-	if (!env->champ->next)
-		return (0);
-	return(CYCLE_TO_DIE);
 }
