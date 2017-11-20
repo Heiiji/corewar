@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 11:00:13 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/17 10:43:10 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/20 11:02:12 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void			make_player(t_vm *env, int nbr)
 			ft_vm_error("ERROR: incorect file\n");
 		champ->pc = cur * max_size;
 		nbr = get_int((unsigned char*)&champ->id);
-		ft_memcpy(champ->registre, (unsigned char*)&nbr, 4);
+		ft_memcpy(&(champ->registre[1]), (unsigned char*)&nbr, 4);
 		printf("Joueur n°%d\n", cur);
 		printf("id n°%d\n", champ->id);
 		printf("Magic : %x\n", champ->head.magic);

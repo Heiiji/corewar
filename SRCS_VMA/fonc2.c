@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 07:51:18 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/17 15:36:01 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/20 11:04:34 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	and(unsigned char *arene, t_champ *champ)
 	}
 	else
 	{
-		val2 = get_int(&arene[refn + get_int(&arene[champ->pc % MEM_SIZE])]);
+		val2 = get_int(&arene[champ->pc % MEM_SIZE]);
 		champ->pc += 4;
 	}
 	val = val & val2;

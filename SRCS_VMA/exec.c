@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 10:47:32 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/17 10:29:10 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/11/20 10:24:32 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	exec(t_vm *env, t_champ *champ)
 			champ->cycle += 10;
 	}
 	exec2(env, champ, commande);
-	if (commande > 16 || commande == 0 || champ->action != NULL)
+	if (commande > 16 || commande == 0)
 		champ->cycle += 1;
 	if (champ->action == NULL && commande <= 16 && commande != 0)
 	{
