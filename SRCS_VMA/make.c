@@ -72,7 +72,6 @@ void			make_player(t_vm *env, int nbr)
 		ft_memcpy(&(champ->registre[1]), (unsigned char*)&nbr, 4);
 		printf("Joueur n°%d\n", cur);
 		printf("id n°%d\n", champ->id);
-		printf("Magic : %x\n", champ->head.magic);
 		printf("Name : %s\n", champ->head.prog_name);
 		printf("Size : %u\n", champ->head.prog_size);
 		printf("Comment : %s\n\n", champ->head.comment);

@@ -12,6 +12,10 @@
 
 #include "../includes/corewar.h"
 
+/*
+** Decriptage en checkant de la plus grande valeur possible à la plus petite
+*/
+
 int		oct_codage(char target, char place, unsigned char value)
 {
 	if (value >= 192 && target == 3 && place == 1)

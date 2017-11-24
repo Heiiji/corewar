@@ -12,6 +12,10 @@
 
 #include "../includes/corewar.h"
 
+/*
+** cur->live est une booleen a 1 si le champion est en vie
+*/
+
 void	give_live(t_champ *champ, int id)
 {
 	t_champ	*cur;
