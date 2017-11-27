@@ -43,7 +43,7 @@ void	and(unsigned char *arene, t_champ *champ)
 	}
 	else
 	{
-		val = get_int(&arene[champ->pc - 2 + get_int(&arene[champ->pc % MEM_SIZE])]);
+		val = get_int(&arene[champ->pc - 2 + get_int(&arene[champ->pc % MEM_SIZE]) % MEM_SIZE]);
 		champ->pc += 4;
 	}
 	if (oct_codage(1,2, ref) == 1)
@@ -62,7 +62,7 @@ void	and(unsigned char *arene, t_champ *champ)
 		champ->pc += 4;
 	}
 	val = val & val2;
-	memcpy(&(champ->registre[REG_SIZE * arene[champ->pc % MEM_SIZE]]), (unsigned char*)(&val), 4);
+	memcpy(&(champ->registre[REG_SIZE * (arene[champ->pc % MEM_SIZE]) % REG_NUMBER]), (unsigned char*)(&val), 4);
 	champ->pc += 1;
 }
 
@@ -234,7 +234,7 @@ void	sti(unsigned char *arene, t_champ *champ)
 	}
 	else
 	{
-		ft_memcpy(&(arene[(add + get_short(&arene[champ->pc % MEM_SIZE]) + refn) % MEM_SIZE]), &champ->registre[reg * REG_SIZE], REG_SIZE);
+		ft_memcpy(&(arene[(add + get_short(&arene[champ->pc % MEM_SIZE]) + refn) % MEM_SIZE]), &champ->registre[(reg % REG_NUMBER) * REG_SIZE], REG_SIZE);
 		champ->pc += 2;
 	}
 }

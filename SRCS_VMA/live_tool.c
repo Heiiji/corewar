@@ -69,7 +69,7 @@ long	check_live(t_vm *env)
 	}
 	if (!env->champ)
 		return (0);
-	if (!env->champ->next || check(env->champ) == 1)
+	if (!env->champ->next || check(env->champ) == 0)
 		return (0);
 	return(CYCLE_TO_DIE);
 }
