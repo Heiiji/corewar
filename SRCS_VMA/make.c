@@ -69,7 +69,7 @@ void			make_player(t_vm *env, int nbr)
 			ft_vm_error("ERROR: incorect file\n");
 		champ->pc = cur * max_size;
 		nbr = get_int((unsigned char*)&champ->id);
-		ft_memcpy(&(champ->registre[1]), (unsigned char*)&nbr, 4);
+		ft_memcpy(&(champ->registre[REG_SIZE]), (unsigned char*)&champ->id, 4);
 		printf("Joueur n°%d\n", cur);
 		printf("id n°%d\n", champ->id);
 		printf("Name : %s\n", champ->head.prog_name);

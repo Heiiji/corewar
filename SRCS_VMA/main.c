@@ -67,7 +67,6 @@ void	crawler(t_vm *env)
 			//usleep(100000);
 		}
 		cycle += 1;
-		//parse(env, activity);
 		if (cycle >= maxcycle)
 			maxcycle += check_live(env);
 	}

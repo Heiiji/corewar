@@ -33,7 +33,7 @@ void	and(unsigned char *arene, t_champ *champ)
 	champ->pc += 1;
 	if (oct_codage(1,1, ref) == 1)
 	{
-		val = champ->registre[arene[champ->pc]];
+		val = get_int(&champ->registre[arene[champ->pc]]);
 		champ->pc += 1;
 	}
 	else if (oct_codage(3,1, ref) == 1)
@@ -48,6 +48,7 @@ void	and(unsigned char *arene, t_champ *champ)
 	}
 	if (oct_codage(1,2, ref) == 1)
 	{
+		printf("ferlgn\n");
 		val2 = champ->registre[arene[champ->pc % MEM_SIZE]];
 		champ->pc += 1;
 	}
