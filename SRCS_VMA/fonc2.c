@@ -12,12 +12,12 @@
 
 #include "../includes/corewar.h"
 
-void	sub(unsigned char *arene, t_champ *champ)
+void	sub(t_vm *env, unsigned char *arene, t_champ *champ)
 {
 	champ->pc += 1;
 	champ->registre[arene[champ->pc + 2]] = champ->registre[arene[champ->pc + 1\
 	]] - champ->registre[arene[champ->pc]];
-	champ->carry = (champ->carry == 1) ? 0 : 1;
+	set_carry(env->champ, champ);
 	champ->pc += 3;
 }
 
@@ -157,7 +157,7 @@ void	xor(unsigned char *arene, t_champ *champ)
 	champ->pc += 1;
 }
 
-void	zjump(unsigned char *arene, t_champ *champ)
+void	zjump(t_vm *env, unsigned char *arene, t_champ *champ)
 {
 	short	value;
 
@@ -166,7 +166,7 @@ void	zjump(unsigned char *arene, t_champ *champ)
 		champ->pc = champ->pc - 1 + value;
 	else
 		champ->pc += 2;
-	champ->carry = champ->carry * -1;
+	set_carry(env->champ, champ);
 }
 
 void	ldi(unsigned char *arene, t_champ *champ)

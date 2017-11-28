@@ -12,6 +12,16 @@
 
 #include "../includes/corewar.h"
 
+void	set_carry(t_champ *champ, t_champ *ref)
+{
+	while (champ)
+	{
+		if (champ->id == ref->id)
+			champ->carry = (champ->carry == 1) ? 0 : 1;
+		champ = champ->next;
+	}
+}
+
 void	rang(t_vm *env, t_champ *champ)
 {
 	t_champ	*cur;

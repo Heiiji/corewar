@@ -52,7 +52,7 @@ void	exec2(t_vm *env, t_champ *champ, unsigned char commande)
 	if (commande == 5)
 	{
 		if (champ->action != NULL)
-			sub(env->arene, champ);
+			sub(env, env->arene, champ);
 		else
 			champ->cycle += 10;
 	}
@@ -85,7 +85,7 @@ void	exec3(t_vm *env, t_champ *champ, unsigned char commande)
 	if (commande == 9)
 	{
 		if (champ->action != NULL)
-			zjump(env->arene, champ);
+			zjump(env, env->arene, champ);
 		else
 			champ->cycle += 20;
 	}

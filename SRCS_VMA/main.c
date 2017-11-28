@@ -63,7 +63,7 @@ void	crawler(t_vm *env)
 				champ = env->champ;
 			if (champ->cycle >= cycle && env->champ->cycle <= cycle)
 				champ = env->champ;
-			//getchar();
+			getchar();
 			//usleep(100000);
 		}
 		cycle += 1;
