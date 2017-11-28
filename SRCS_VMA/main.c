@@ -63,7 +63,7 @@ void	crawler(t_vm *env)
 				champ = env->champ;
 			if (champ->cycle >= cycle && env->champ->cycle <= cycle)
 				champ = env->champ;
-			getchar();
+			//getchar();
 			//usleep(100000);
 		}
 		cycle += 1;
@@ -72,14 +72,21 @@ void	crawler(t_vm *env)
 	}
 }
 
+void	passive_check(int ac)
+{
+	if (ac < 2)
+		ft_vm_error("Erreur d'argument\n");
+	if (CYCLE_TO_DIE < 1 || CYCLE_DELTA < 1 || IND_SIZE != 2 || REG_SIZE != 4)
+		ft_vm_error("Erreur de variables d'environnement\n");
+}
+
 int main(int ac, char **av)
 {
 	int		cur;
 	t_vm	env;
 	t_champ	*champ;
 
-	if (ac < 2)
-		ft_vm_error("Erreur d'argument\n");
+	passive_check(ac);
 	if (!(champ = (t_champ*)malloc(sizeof(t_champ))))
 		ft_vm_error("Erreur de malloc sur le premier champions\n");
 	env.champ = champ;
@@ -109,7 +116,7 @@ int main(int ac, char **av)
 	champ->next = NULL;
 	make_arene(&env);
 	crawler(&env);
-	ft_put(champ->head.prog_name, ft_strlen(champ->head.prog_name) - 1, 1, 0);
+	ft_put(env.champ->head.prog_name, ft_strlen(env.champ->head.prog_name) - 1, 1, 0);
 	ft_put(" Win !\n", 7, 1, 0);
 	return (0);
 }

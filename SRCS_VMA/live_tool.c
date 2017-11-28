@@ -45,9 +45,14 @@ int		check(t_champ *champ)
 
 long	check_live(t_vm *env)
 {
-	t_champ	*cur;
-	t_champ *prev;
+	t_champ							*cur;
+	t_champ 						*prev;
+	static unsigned long die =		CYCLE_TO_DIE;
+	static unsigned long eck =		0;
 
+	if (eck == 0)
+		die = env->nbr_cycles;
+	eck += 1;
 	cur = env->champ;
 	prev = NULL;
 	while (cur)
@@ -71,5 +76,6 @@ long	check_live(t_vm *env)
 		return (0);
 	if (!env->champ->next || check(env->champ) == 0)
 		return (0);
-	return(CYCLE_TO_DIE);
+	die -= CYCLE_DELTA;
+	return(die);
 }

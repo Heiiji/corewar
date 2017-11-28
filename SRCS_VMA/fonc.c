@@ -57,9 +57,9 @@ void	live(unsigned char *arene, t_champ *champ, t_vm *env)
 	ft_put(tmp, 4, 1, 0);
 	ft_put(" is alive !", 10, 1, 0);
 	free(tmp);
-	env->winner = get_int(&arene[champ->pc]);
+	env->winner = tp;
 	champ->carry = (champ->carry == 1) ? 0 : 1;
-	give_live(champ, get_int(&arene[champ->pc]));
+	give_live(champ, tp);
 	champ->pc += 4;
 }
 
