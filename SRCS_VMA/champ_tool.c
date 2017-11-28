@@ -12,6 +12,11 @@
 
 #include "../includes/corewar.h"
 
+/*
+** Le carry est une valeur commune au process d'un champions,
+** donc on edite tout ca !!
+*/
+
 void	set_carry(t_champ *champ, t_champ *ref)
 {
 	while (champ)
@@ -21,6 +26,10 @@ void	set_carry(t_champ *champ, t_champ *ref)
 		champ = champ->next;
 	}
 }
+
+/*
+** Parce que ranger permet une meilleur circulation du crawler
+*/
 
 void	rang(t_vm *env, t_champ *champ)
 {

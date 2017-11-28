@@ -47,6 +47,10 @@ int		oct_codage(char target, char place, unsigned char value)
 	return (0);
 }
 
+/*
+** Les commandes du champions une par une
+*/
+
 void	live(unsigned char *arene, t_champ *champ, t_vm *env)
 {
 	char	*tmp;

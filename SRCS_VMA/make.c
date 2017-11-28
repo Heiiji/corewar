@@ -66,7 +66,7 @@ void			make_player(t_vm *env, int nbr)
 		if (magic_check(COREWAR_EXEC_MAGIC, champ->head.magic) != 0)
 			ft_vm_error("ERROR: incorect magic number\n");
 		champ->head.prog_size = inv_uint(champ->head.prog_size);
-		if (read(champ->fd, &env->arene[cur * max_size], champ->head.prog_size + 5) != champ->head.prog_size)
+		if (read(champ->fd, &env->arene[cur * max_size], champ->head.prog_size + 5) != champ->head.prog_size || champ->head.prog_size > CHAMP_MAX_SIZE)
 			ft_vm_error("ERROR: incorect file\n");
 		champ->pc = cur * max_size;
 		tmp = -champ->id;
@@ -99,6 +99,5 @@ void	make_arene(t_vm *env)
 		cur = cur->next;
 		nbr++;
 	}
-	printf("Nombre de joueurs : %d\n\n", nbr);
 	make_player(env, nbr);
 }
