@@ -50,8 +50,10 @@ int		oct_codage(char target, char place, unsigned char value)
 void	live(unsigned char *arene, t_champ *champ, t_vm *env)
 {
 	char	*tmp;
+	int		tp;
 
-	tmp = ft_itoa(get_int(&arene[champ->pc]));
+	tp = (get_int(&arene[champ->pc]) > 0) ? get_int(&arene[champ->pc]) : -1 * get_int(&arene[champ->pc]);
+	tmp = ft_itoa(tp);
 	ft_put(tmp, 4, 1, 0);
 	ft_put(" is alive !", 10, 1, 0);
 	free(tmp);
