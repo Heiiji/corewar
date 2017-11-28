@@ -38,6 +38,7 @@ int		check(t_champ *champ)
 	{
 		if (champ->id != cur->id)
 			return (1);
+		cur->live = 0;
 		cur = cur->next;
 	}
 	return (0);

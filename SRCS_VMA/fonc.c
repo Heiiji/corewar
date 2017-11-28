@@ -63,7 +63,7 @@ void	live(unsigned char *arene, t_champ *champ, t_vm *env)
 	champ->pc += 4;
 }
 
-void	ld(unsigned char *arene, t_champ *champ)
+void	ld(t_vm *env, unsigned char *arene, t_champ *champ)
 {
 	unsigned char		value;
 	unsigned char		*elem;
@@ -87,11 +87,11 @@ void	ld(unsigned char *arene, t_champ *champ)
 		champ->pc += 4;
 		ft_memcpy(&champ->registre[arene[champ->pc]], &arene[(ref + (val % IDX_MOD)) % MEM_SIZE], REG_SIZE);
 	}
-	champ->carry = (champ->carry == 1) ? 0 : 1;
+	set_carry(env->champ, champ);
 	champ->pc += 1;
 }
 
-void	st(unsigned char *arene, t_champ *champ)
+void	st(t_vm *env, unsigned char *arene, t_champ *champ)
 {
 	unsigned char	*reg;
 
@@ -110,14 +110,14 @@ void	st(unsigned char *arene, t_champ *champ)
 		ft_memcpy(&arene[get_short(&arene[champ->pc]) % (MEM_SIZE)], reg, REG_SIZE);
 		champ->pc += 1;
 	}
-	champ->carry = (champ->carry == 1) ? 0 : 1;
+	set_carry(env->champ, champ);
 	champ->pc += 1;
 }
 
-void	add(unsigned char *arene, t_champ *champ)
+void	add(t_vm *env, unsigned char *arene, t_champ *champ)
 {
 	champ->pc += 1;
 	champ->registre[arene[champ->pc + 2]] = champ->registre[arene[champ->pc + 1] * REG_SIZE] + champ->registre[arene[champ->pc] * REG_SIZE];
-	champ->carry = (champ->carry == 1) ? 0 : 1;
+	set_carry(env->champ, champ);
 	champ->pc += 3;
 }

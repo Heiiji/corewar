@@ -262,7 +262,7 @@ void	ft_fork(unsigned char *arene, t_champ *champ, t_vm *env)
 	champ->pc += 2;
 }
 
-void	lld(unsigned char *arene, t_champ *champ)
+void	lld(t_vm *env, unsigned char *arene, t_champ *champ)
 {
 	unsigned char		value;
 	unsigned char		*elem;
@@ -288,7 +288,7 @@ void	lld(unsigned char *arene, t_champ *champ)
 		ft_memcpy(&champ->registre[arene[champ->pc]], &arene[(ref + val) % MEM_SIZE], REG_SIZE);
 		champ->pc += 1;
 	}
-	champ->carry = (champ->carry == 1) ? 0 : 1;
+	set_carry(env->champ, champ);
 }
 
 void	lldi(unsigned char *arene, t_champ *champ)

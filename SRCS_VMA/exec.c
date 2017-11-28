@@ -45,7 +45,7 @@ void	exec2(t_vm *env, t_champ *champ, unsigned char commande)
 	if (commande == 4)
 	{
 		if (champ->action != NULL)
-			add(env->arene, champ);
+			add(env, env->arene, champ);
 		else
 			champ->cycle += 10;
 	}
@@ -123,7 +123,7 @@ void	exec5(t_vm *env, t_champ *champ, unsigned char commande)
 	if (commande == 13)
 	{
 		if (champ->action != NULL)
-			lld(env->arene, champ);
+			lld(env, env->arene, champ);
 		else
 			champ->cycle += 10;
 	}
@@ -137,7 +137,7 @@ void	exec5(t_vm *env, t_champ *champ, unsigned char commande)
 	if (commande == 3)
 	{
 		if (champ->action != NULL)
-			st(env->arene, champ);
+			st(env, env->arene, champ);
 		else
 			champ->cycle += 5;
 	}
@@ -164,7 +164,7 @@ void	exec6(t_vm *env, t_champ *champ, unsigned char commande)
 	if (commande == 2)
 	{
 		if (champ->action != NULL)
-			ld(env->arene, champ);
+			ld(env, env->arene, champ);
 		else
 			champ->cycle += 5;
 	}
