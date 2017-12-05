@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/05 10:02:08 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/05 12:18:07 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,8 @@ int main(int ac, char **av)
 	champ->next = NULL;
 	make_arene(&env);
 	crawler(&env);
-	ft_put(env.champ->head.prog_name, ft_strlen(env.champ->head.prog_name) - 1, 1, 0);
+	ft_put(env.champ->head.prog_name, ft_strlen(env.champ->head.prog_name) - \
+	1, 1, 0);
 	ft_put(" Win !\n", 7, 1, 0);
 	return (0);
 }

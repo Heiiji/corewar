@@ -6,7 +6,7 @@
 /*   By: zaz <zaz@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2017/11/08 10:08:28 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/05 13:06:50 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@
 #define REG_SIZE				4
 #define DIR_SIZE				REG_SIZE
 
-
 # define REG_CODE				1
 # define DIR_CODE				2
 # define IND_CODE				3
-
 
 #define MAX_ARGS_NUMBER			4
 #define MAX_PLAYERS				4
