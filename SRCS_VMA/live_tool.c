@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 09:51:00 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/20 10:19:24 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/05 09:03:23 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,8 @@ long	check_live(t_vm *env)
 		prev = cur;
 		cur = cur->next;
 	}
-	if (!env->champ)
-		return (0);
-	if (!env->champ->next || check(env->champ) == 0)
-		return (0);
 	die -= CYCLE_DELTA;
+	if (check(env->champ) == 0 || die <= 0)
+		return (0);
 	return(die);
 }

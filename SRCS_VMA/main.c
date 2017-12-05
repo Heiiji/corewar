@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/20 12:34:07 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/05 10:02:08 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,8 @@ void	crawler(t_vm *env)
 		champ = env->champ;
 		while (champ && cycle >= champ->cycle)
 		{
-			printf("\nCycle : %llu/%llu\n", cycle, maxcycle);
 			activity += 1;
-			printf("Champion |%d| pc |%llu|\n", champ->id, champ->pc);
+			printf("Champion |%d| pc |%llu| Cycle : %llu/%llu\n", champ->id, champ->pc, cycle, maxcycle);
 			printf("forward |%x|%x|%x|%x|%x|%x|%x|%x|%x|%x|%x|\n", (int)env->arene[champ->pc], (int)env->arene[champ->pc + 1], (int)env->arene[champ->pc + 2], (int)env->arene[champ->pc + 3], (int)env->arene[champ->pc + 4], (int)env->arene[champ->pc + 5], (int)env->arene[champ->pc + 6], (int)env->arene[champ->pc + 7], (int)env->arene[champ->pc + 8], (int)env->arene[champ->pc + 9], (int)env->arene[champ->pc + 10]);
 			exec(env, champ);
 			if (champ->next)
@@ -64,7 +63,6 @@ void	crawler(t_vm *env)
 			if (champ->cycle >= cycle && env->champ->cycle <= cycle)
 				champ = env->champ;
 			getchar();
-			//usleep(100000);
 		}
 		cycle += 1;
 		if (cycle >= maxcycle)

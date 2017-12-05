@@ -26,6 +26,7 @@ SRCS_VMA  = SRCS_VMA/main.c				\
 			SRCS_VMA/exec.c 			\
 			SRCS_VMA/fonc.c 			\
 			SRCS_VMA/fonc2.c 			\
+			SRCS_VMA/fonc3.c 			\
 			$(SRCS_GEN)
 
 

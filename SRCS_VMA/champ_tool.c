@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 15:02:08 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/20 11:04:09 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/05 08:47:36 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,11 @@ void	rang(t_vm *env, t_champ *champ)
 	{
 		champ->next = cur->next;
 		cur->next = champ;
+		return ;
 	}
-	else
-	{
-		champ->next = cur;
-		if (prev != champ)
-			prev->next = champ;
-	}
+	champ->next = cur;
+	if (prev != champ)
+		prev->next = champ;
 }
 
 t_champ	*find_by_id(t_vm *env, int id)
