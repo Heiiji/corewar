@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/05 12:18:07 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/05 14:29:15 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_vm_error(char *error)
 	exit(0);
 }
 
-int	put_name(int *cur, char **av)
+int		put_name(int *cur, char **av)
 {
 	static int	name = 0;
 
@@ -78,7 +78,7 @@ void	passive_check(int ac)
 		ft_vm_error("Erreur de variables d'environnement\n");
 }
 
-int main(int ac, char **av)
+int 	main(int ac, char **av)
 {
 	int		cur;
 	t_vm	env;
@@ -110,7 +110,7 @@ int main(int ac, char **av)
 			ft_vm_error("Erreur de malloc sur les champions\n");
 		cur++;
 	}
-	free (champ->next);
+	free(champ->next);
 	champ->next = NULL;
 	make_arene(&env);
 	crawler(&env);

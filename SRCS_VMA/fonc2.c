@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 07:51:18 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/05 12:38:59 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/05 14:17:17 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	and(unsigned char *arene, t_champ *champ)
 {
-	int 			val;
+	int				val;
 	int				val2;
 	int				refn;
 	unsigned char	ref;
@@ -22,9 +22,9 @@ void	and(unsigned char *arene, t_champ *champ)
 	ref = arene[champ->pc];
 	refn = champ->pc - 1;
 	champ->pc += 1;
-	if (oct_codage(1,1, ref) == 1)
+	if (oct_codage(1, 1, ref) == 1)
 		val = get_int(&champ->registre[arene[champ->pc]]);
-	else if (oct_codage(3,1, ref) == 1)
+	else if (oct_codage(3, 1, ref) == 1)
 	{
 		val = get_short(&arene[champ->pc]);
 		champ->pc += 1;
@@ -36,9 +36,9 @@ void	and(unsigned char *arene, t_champ *champ)
 		champ->pc += 3;
 	}
 	champ->pc += 1;
-	if (oct_codage(1,2, ref) == 1)
+	if (oct_codage(1, 2, ref) == 1)
 		val2 = champ->registre[arene[champ->pc % MEM_SIZE]];
-	else if (oct_codage(3,2, ref) == 1)
+	else if (oct_codage(3, 2, ref) == 1)
 	{
 		val2 = get_short(&arene[champ->pc % MEM_SIZE]);
 		champ->pc += 1;
@@ -57,7 +57,7 @@ void	and(unsigned char *arene, t_champ *champ)
 
 void	or(unsigned char *arene, t_champ *champ)
 {
-	int 			val;
+	int				val;
 	int				val2;
 	int				refn;
 	unsigned char	ref;
@@ -65,9 +65,9 @@ void	or(unsigned char *arene, t_champ *champ)
 	ref = arene[champ->pc];
 	refn = champ->pc - 1;
 	champ->pc += 1;
-	if (oct_codage(1,1, ref) == 1)
+	if (oct_codage(1, 1, ref) == 1)
 		val = champ->registre[arene[champ->pc]];
-	else if (oct_codage(3,1, ref) == 1)
+	else if (oct_codage(3, 1, ref) == 1)
 	{
 		val = get_short(&arene[champ->pc]);
 		champ->pc += 1;
@@ -79,9 +79,9 @@ void	or(unsigned char *arene, t_champ *champ)
 		champ->pc += 3;
 	}
 	champ->pc += 1;
-	if (oct_codage(1,2, ref) == 1)
+	if (oct_codage(1, 2, ref) == 1)
 		val2 = champ->registre[arene[champ->pc % MEM_SIZE]];
-	else if (oct_codage(3,2, ref) == 1)
+	else if (oct_codage(3, 2, ref) == 1)
 	{
 		val2 = get_short(&arene[champ->pc % MEM_SIZE]);
 		champ->pc += 1;
@@ -99,7 +99,7 @@ void	or(unsigned char *arene, t_champ *champ)
 
 void	xor(unsigned char *arene, t_champ *champ)
 {
-	int 			val;
+	int				val;
 	int				val2;
 	int				refn;
 	unsigned char	ref;
@@ -107,9 +107,9 @@ void	xor(unsigned char *arene, t_champ *champ)
 	ref = arene[champ->pc];
 	refn = champ->pc - 1;
 	champ->pc += 1;
-	if (oct_codage(1,1, ref) == 1)
+	if (oct_codage(1, 1, ref) == 1)
 		val = champ->registre[arene[champ->pc]];
-	else if (oct_codage(3,1, ref) == 1)
+	else if (oct_codage(3, 1, ref) == 1)
 	{
 		val = get_short(&arene[champ->pc]);
 		champ->pc += 1;
@@ -121,9 +121,9 @@ void	xor(unsigned char *arene, t_champ *champ)
 		champ->pc += 3;
 	}
 	champ->pc += 1;
-	if (oct_codage(1,2, ref) == 1)
+	if (oct_codage(1, 2, ref) == 1)
 		val2 = champ->registre[arene[champ->pc % MEM_SIZE]];
-	else if (oct_codage(3,2, ref) == 1)
+	else if (oct_codage(3, 2, ref) == 1)
 	{
 		val2 = get_short(&arene[champ->pc % MEM_SIZE]);
 		champ->pc += 1;
@@ -150,17 +150,17 @@ void	ldi(unsigned char *arene, t_champ *champ)
 	ref = arene[champ->pc];
 	refn = champ->pc - 1;
 	champ->pc += 1;
-	if (oct_codage(1,1, ref) == 1)
+	if (oct_codage(1, 1, ref) == 1)
 		val = champ->registre[arene[champ->pc]];
 	else
 	{
 		val = get_short(&champ->registre[arene[champ->pc % MEM_SIZE]]);
-		if (oct_codage(2,1, ref) == 1)
+		if (oct_codage(2, 1, ref) == 1)
 			val = get_short(&arene[(refn + (val % IDX_MOD)) % MEM_SIZE]);
 		champ->pc += 1;
 	}
 	champ->pc += 1;
-	if (oct_codage(1,2, ref) == 1)
+	if (oct_codage(1, 2, ref) == 1)
 		val2 = champ->registre[arene[champ->pc]];
 	else
 	{
@@ -185,7 +185,7 @@ void	sti(unsigned char *arene, t_champ *champ)
 	refn = champ->pc - 1;
 	reg = arene[champ->pc + 1];
 	champ->pc += 2;
-	if (oct_codage(1,2, ref) == 1)
+	if (oct_codage(1, 2, ref) == 1)
 		add = champ->registre[arene[champ->pc % MEM_SIZE] % (REG_NUMBER * \
 			REG_SIZE)];
 	else
@@ -194,7 +194,7 @@ void	sti(unsigned char *arene, t_champ *champ)
 		champ->pc += 1;
 	}
 	champ->pc += 1;
-	if (oct_codage(1,3, ref) == 1)
+	if (oct_codage(1, 3, ref) == 1)
 		ft_memcpy(&(arene[(add + get_short(&champ->registre[arene[champ->pc % \
 		MEM_SIZE]])) % MEM_SIZE]), &champ->registre[reg * REG_SIZE], REG_SIZE);
 	else
@@ -216,17 +216,17 @@ void	lldi(unsigned char *arene, t_champ *champ)
 	ref = arene[champ->pc];
 	refn = champ->pc - 1;
 	champ->pc += 1;
-	if (oct_codage(1,1, ref) == 1)
+	if (oct_codage(1, 1, ref) == 1)
 		val = champ->registre[arene[champ->pc]];
 	else
 	{
 		val = get_short(&champ->registre[arene[champ->pc % MEM_SIZE]]);
-		if (oct_codage(2,1, ref) == 1)
+		if (oct_codage(2, 1, ref) == 1)
 			val = get_short(&arene[(refn + val) % MEM_SIZE]);
 		champ->pc += 1;
 	}
 	champ->pc += 1;
-	if (oct_codage(1,2, ref) == 1)
+	if (oct_codage(1, 2, ref) == 1)
 		val2 = champ->registre[arene[champ->pc]];
 	else
 	{

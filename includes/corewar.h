@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 12:59:01 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/05 13:05:42 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/05 14:36:39 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,26 @@
 # include <limits.h>
 # include <stdio.h>
 # include <fcntl.h>
-# include "op.h"
 
 # define PROG_NAME_LENGTH		(128)
 # define COMMENT_LENGTH			(2048)
 
-# define NAME_CMD_STRING			".name"
+# define IND_SIZE				2
+# define REG_SIZE				4
+# define DIR_SIZE				REG_SIZE
+# define IDX_MOD				(MEM_SIZE / 8)
+
+# define REG_NUMBER				16
+# define MEM_SIZE				(4*1024)
+# define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
+
+# define NAME_CMD_STRING		".name"
 # define COMMENT_CMD_STRING		".comment"
 
 # define COREWAR_EXEC_MAGIC		0xea83f3
+
+# define CYCLE_TO_DIE			1536
+# define CYCLE_DELTA			50
 
 # define BUFF_SIZE (CHAMP_MAX_SIZE)
 # ifndef OPEN_MAX
@@ -37,6 +48,14 @@
 /*
 ** Assembler part
 */
+
+typedef struct			s_header
+{
+  unsigned int			magic;
+  char					prog_name[PROG_NAME_LENGTH + 1];
+  unsigned int			prog_size;
+  char					comment[COMMENT_LENGTH + 1];
+}						t_header;
 
 typedef struct			s_asm
 {

@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 10:47:32 by jjuret            #+#    #+#             */
-/*   Updated: 2017/11/20 10:24:32 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/05 14:27:31 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,8 @@ void	exec(t_vm *env, t_champ *champ)
 		champ->pc -= 1;
 		champ->action = &env->arene[champ->pc];
 	}
-	else
-		if (champ->action != NULL)
-			champ->action = NULL;
+	else if (champ->action != NULL)
+		champ->action = NULL;
 	rang(env, env->champ);
 }
 
@@ -146,7 +145,6 @@ void	exec5(t_vm *env, t_champ *champ, unsigned char commande)
 
 void	exec6(t_vm *env, t_champ *champ, unsigned char commande)
 {
-
 	if (commande == 15)
 	{
 		if (champ->action != NULL)

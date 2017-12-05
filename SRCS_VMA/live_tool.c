@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 09:51:00 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/05 09:03:23 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/05 14:28:52 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ int		check(t_champ *champ)
 long	check_live(t_vm *env)
 {
 	t_champ							*cur;
-	t_champ 						*prev;
-	static unsigned long die =		CYCLE_TO_DIE;
-	static unsigned long eck =		0;
+	t_champ							*prev;
+	static unsigned long			die = CYCLE_TO_DIE;
+	static unsigned long			eck = 0;
 
 	if (eck == 0)
 		die = env->nbr_cycles;
@@ -76,5 +76,5 @@ long	check_live(t_vm *env)
 	die -= CYCLE_DELTA;
 	if (check(env->champ) == 0 || die <= 0)
 		return (0);
-	return(die);
+	return (die);
 }

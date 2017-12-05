@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_tabtab.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeahoare <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jeahoare <jeahoare@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/25 08:02:53 by jeahoare          #+#    #+#             */
-/*   Updated: 2017/07/25 08:02:56 by jeahoare         ###   ########.fr       */
+/*   Updated: 2017/12/05 14:25:01 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 ** Si ce dernier n existe pas, il est créé et la str est fraîchement
 ** allouée a *tab.
 **
-*/	
+*/
 
 /* ***************************************
 ** START - Fonctions de libft importées.
