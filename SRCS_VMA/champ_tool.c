@@ -6,13 +6,13 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/02 15:02:08 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/05 12:33:30 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/06 09:08:35 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
 
-void	set_carry(t_champ *champ, t_champ *ref)
+void		set_carry(t_champ *champ, t_champ *ref)
 {
 	while (champ)
 	{
@@ -22,7 +22,7 @@ void	set_carry(t_champ *champ, t_champ *ref)
 	}
 }
 
-void	rang(t_vm *env, t_champ *champ)
+void		rang(t_vm *env, t_champ *champ)
 {
 	t_champ	*cur;
 	t_champ *prev;
@@ -50,7 +50,7 @@ void	rang(t_vm *env, t_champ *champ)
 		prev->next = champ;
 }
 
-t_champ	*find_by_id(t_vm *env, int id)
+t_champ		*find_by_id(t_vm *env, int id)
 {
 	t_champ	*cur;
 
@@ -73,7 +73,7 @@ short		get_short(unsigned char *read)
 	return (*((short*)(&tmp[0])));
 }
 
-int		get_int(unsigned char *read)
+int			get_int(unsigned char *read)
 {
 	unsigned char tmp[4];
 

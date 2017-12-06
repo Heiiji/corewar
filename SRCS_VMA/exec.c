@@ -6,38 +6,11 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 10:47:32 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/05 14:27:31 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/06 09:11:37 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
-
-void	exec(t_vm *env, t_champ *champ)
-{
-	unsigned char commande;
-
-	commande = env->arene[champ->pc];
-	champ->pc += 1;
-	printf("commande : %u\n", commande);
-	if (commande == 1)
-	{
-		if (champ->action != NULL)
-			live(env->arene, champ, env);
-		else
-			champ->cycle += 10;
-	}
-	exec2(env, champ, commande);
-	if (commande > 16 || commande == 0)
-		champ->cycle += 1;
-	if (champ->action == NULL && commande <= 16 && commande != 0)
-	{
-		champ->pc -= 1;
-		champ->action = &env->arene[champ->pc];
-	}
-	else if (champ->action != NULL)
-		champ->action = NULL;
-	rang(env, env->champ);
-}
 
 void	exec2(t_vm *env, t_champ *champ, unsigned char commande)
 {

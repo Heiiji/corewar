@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 09:51:00 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/05 14:28:52 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/06 10:31:27 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,20 @@
 ** cur->live est une booleen a 1 si le champion est en vie
 */
 
-void	give_live(t_champ *champ, int id)
+static void	extend(t_champ **prev, t_champ **cur, t_vm *env)
+{
+	if (prev)
+		(*prev)->next = (*cur)->next;
+	else
+	{
+		(*prev) = (*cur)->next;
+		env->champ = (*prev);
+	}
+	free(*cur);
+	(*cur) = (*prev);
+}
+
+void		give_live(t_champ *champ, int id)
 {
 	t_champ	*cur;
 
@@ -29,7 +42,7 @@ void	give_live(t_champ *champ, int id)
 	}
 }
 
-int		check(t_champ *champ)
+int			check(t_champ *champ)
 {
 	t_champ	*cur;
 
@@ -44,7 +57,7 @@ int		check(t_champ *champ)
 	return (0);
 }
 
-long	check_live(t_vm *env)
+long		check_live(t_vm *env)
 {
 	t_champ							*cur;
 	t_champ							*prev;
@@ -59,17 +72,7 @@ long	check_live(t_vm *env)
 	while (cur)
 	{
 		if (cur->live != 1)
-		{
-			if (prev)
-				prev->next = cur->next;
-			else
-			{
-				prev = cur->next;
-				env->champ = prev;
-			}
-			free(cur);
-			cur = prev;
-		}
+			extend(&prev, &cur, env);
 		prev = cur;
 		cur = cur->next;
 	}

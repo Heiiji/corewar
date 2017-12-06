@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/07 07:51:18 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/05 14:17:17 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/06 11:10:55 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,9 +181,9 @@ void	sti(unsigned char *arene, t_champ *champ)
 	unsigned char	reg;
 	unsigned char	add;
 
-	ref = arene[champ->pc];
+	ref = arene[champ->pc % MEM_SIZE];
 	refn = champ->pc - 1;
-	reg = arene[champ->pc + 1];
+	reg = arene[(champ->pc + 1) % MEM_SIZE];
 	champ->pc += 2;
 	if (oct_codage(1, 2, ref) == 1)
 		add = champ->registre[arene[champ->pc % MEM_SIZE] % (REG_NUMBER * \
@@ -236,26 +236,5 @@ void	lldi(unsigned char *arene, t_champ *champ)
 	}
 	ft_memcpy(&champ->registre[arene[champ->pc + 1]], &arene[(val + val2) % \
 	MEM_SIZE], REG_SIZE);
-	champ->pc += 2;
-}
-
-void	ft_lfork(unsigned char *arene, t_champ *champ, t_vm *env)
-{
-	long			refn;
-	short			target;
-	t_champ			*new;
-
-	refn = champ->pc - 1;
-	target = get_short(&arene[champ->pc]);
-	new = (t_champ*)malloc(sizeof(t_champ));
-	new->action = NULL;
-	new->next = env->champ;
-	new->pc = refn + target;
-	new->id = champ->id;
-	ft_memcpy(new->registre, champ->registre, REG_SIZE * REG_NUMBER);
-	new->carry = champ->carry;
-	new->cycle = champ->cycle;
-	new->head = champ->head;
-	rang(env, new);
 	champ->pc += 2;
 }

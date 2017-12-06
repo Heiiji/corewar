@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 11:00:13 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/05 14:23:13 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/06 10:44:40 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,12 @@ unsigned int	inv_uint(unsigned int target)
 
 void			make_player(t_vm *env, int nbr)
 {
-	int		max_size;
-	int		cur;
-	long	tmp;
-	char	*line;
-	t_champ	*champ;
+	int				max_size;
+	static int		cur = 0;
+	long			tmp;
+	char			*line;
+	t_champ			*champ;
 
-	cur = 0;
 	max_size = MEM_SIZE / nbr;
 	champ = env->champ;
 	while (champ)
@@ -73,19 +72,10 @@ void			make_player(t_vm *env, int nbr)
 		tmp = -champ->id;
 		tmp = get_int((unsigned char*)&tmp);
 		ft_memcpy(&champ->registre[REG_SIZE], &tmp, 4);
-		printf("Joueur n°%d\n", cur);
-		printf("id n°%d\n", champ->id);
-		printf("Name : %s\n", champ->head.prog_name);
-		printf("Size : %u\n", champ->head.prog_size);
-		printf("Comment : %s\n\n", champ->head.comment);
 		cur++;
 		champ = champ->next;
 	}
 }
-
-/*
-** Construction de l'arene et check des joueurs (pour la securités)
-*/
 
 void			make_arene(t_vm *env)
 {

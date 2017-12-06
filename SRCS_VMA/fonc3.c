@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 08:53:00 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/05 12:20:11 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/06 09:27:39 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,25 +59,23 @@ void	lld(t_vm *env, unsigned char *arene, t_champ *champ)
 	unsigned long long	ref;
 
 	ref = champ->pc - 1;
-	if (oct_codage(3, 1, arene[champ->pc]) == 1)
+	champ->pc += 1;
+	if (oct_codage(3, 1, arene[champ->pc - 1]) == 1)
 	{
-		champ->pc += 1;
 		val2 = get_short(&arene[champ->pc]);
 		champ->pc += 2;
-		ft_memcpy(&champ->registre[arene[champ->pc]], &arene[(ref + val2) % \
-		MEM_SIZE], REG_SIZE);
-		champ->pc += 1;
+		ft_memcpy(&champ->registre[arene[champ->pc] * REG_SIZE], &arene[(ref + \
+			val2) % MEM_SIZE], REG_SIZE);
 	}
 	else
 	{
-		champ->pc += 1;
 		val = get_int(&arene[champ->pc]);
 		val = get_int(&arene[(ref + val) % MEM_SIZE]);
 		champ->pc += 4;
-		ft_memcpy(&champ->registre[arene[champ->pc]], &arene[(ref + val) % \
-		MEM_SIZE], REG_SIZE);
-		champ->pc += 1;
+		ft_memcpy(&champ->registre[arene[champ->pc] * REG_SIZE], &arene[(ref + \
+			val) % MEM_SIZE], REG_SIZE);
 	}
+	champ->pc += 1;
 	set_carry(env->champ, champ);
 }
 

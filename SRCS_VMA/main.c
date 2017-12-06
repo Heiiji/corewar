@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/05 14:29:15 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/06 10:47:17 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,11 @@ int		put_name(int *cur, char **av)
 
 void	crawler(t_vm *env)
 {
-	t_champ				*champ;
-	int					activity;
-	unsigned long long	cycle;
-	unsigned long long	maxcycle;
+	t_champ						*champ;
+	int							activity;
+	static unsigned long long	cycle = 0;
+	unsigned long long			maxcycle;
 
-	cycle = 0;
 	maxcycle = CYCLE_TO_DIE;
 	while (cycle < maxcycle)
 	{
@@ -53,8 +52,6 @@ void	crawler(t_vm *env)
 		while (champ && cycle >= champ->cycle)
 		{
 			activity += 1;
-			printf("Champion |%d| pc |%llu| Cycle : %llu/%llu\n", champ->id, champ->pc, cycle, maxcycle);
-			printf("forward |%x|%x|%x|%x|%x|%x|%x|%x|%x|%x|%x|\n", (int)env->arene[champ->pc], (int)env->arene[champ->pc + 1], (int)env->arene[champ->pc + 2], (int)env->arene[champ->pc + 3], (int)env->arene[champ->pc + 4], (int)env->arene[champ->pc + 5], (int)env->arene[champ->pc + 6], (int)env->arene[champ->pc + 7], (int)env->arene[champ->pc + 8], (int)env->arene[champ->pc + 9], (int)env->arene[champ->pc + 10]);
 			exec(env, champ);
 			if (champ->next)
 				champ = champ->next;
@@ -62,7 +59,6 @@ void	crawler(t_vm *env)
 				champ = env->champ;
 			if (champ->cycle >= cycle && env->champ->cycle <= cycle)
 				champ = env->champ;
-			getchar();
 		}
 		cycle += 1;
 		if (cycle >= maxcycle)
@@ -78,7 +74,7 @@ void	passive_check(int ac)
 		ft_vm_error("Erreur de variables d'environnement\n");
 }
 
-int 	main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	int		cur;
 	t_vm	env;

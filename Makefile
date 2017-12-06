@@ -23,7 +23,9 @@ SRCS_VMA  = SRCS_VMA/main.c				\
 			SRCS_VMA/champ_tool.c 		\
 			SRCS_VMA/live_tool.c 		\
 			SRCS_VMA/make.c 			\
+			SRCS_VMA/octet_codage.c 	\
 			SRCS_VMA/exec.c 			\
+			SRCS_VMA/exec2.c 			\
 			SRCS_VMA/fonc.c 			\
 			SRCS_VMA/fonc2.c 			\
 			SRCS_VMA/fonc3.c 			\

@@ -6,46 +6,11 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 12:45:17 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/05 12:16:38 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/06 09:22:23 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/corewar.h"
-
-/*
-** Decriptage en checkant de la plus grande valeur possible à la plus petite
-*/
-
-int		oct_codage(char target, char place, unsigned char value)
-{
-	if (value >= 192 && target == 3 && place == 1)
-		return (1);
-	else if (value >= 128 && target == 2 && place == 1)
-		return (1);
-	else if (value < 128 && target == 1 && place == 1)
-		return (1);
-	if (value >= 128)
-		value -= 128;
-	if (value >= 64)
-		value -= 64;
-	if (value >= 48 && target == 3 && place == 2)
-		return (1);
-	else if (value >= 32 && target == 2 && place == 2)
-		return (1);
-	else if (value < 32 && target == 1 && place == 2)
-		return (1);
-	if (value >= 32)
-		value -= 32;
-	if (value >= 16)
-		value -= 16;
-	if (value >= 12 && target == 3 && place == 3)
-		return (1);
-	else if (value >= 8 && target == 2 && place == 3)
-		return (1);
-	else if (value < 8 && target == 1 && place == 3)
-		return (1);
-	return (0);
-}
 
 /*
 ** Les commandes du champions une par une
@@ -131,4 +96,25 @@ void	add(t_vm *env, unsigned char *arene, t_champ *champ)
 	] * REG_SIZE] + champ->registre[arene[champ->pc] * REG_SIZE];
 	set_carry(env->champ, champ);
 	champ->pc += 3;
+}
+
+void	ft_lfork(unsigned char *arene, t_champ *champ, t_vm *env)
+{
+	long			refn;
+	short			target;
+	t_champ			*new;
+
+	refn = champ->pc - 1;
+	target = get_short(&arene[champ->pc]);
+	new = (t_champ*)malloc(sizeof(t_champ));
+	new->action = NULL;
+	new->next = env->champ;
+	new->pc = refn + target;
+	new->id = champ->id;
+	ft_memcpy(new->registre, champ->registre, REG_SIZE * REG_NUMBER);
+	new->carry = champ->carry;
+	new->cycle = champ->cycle;
+	new->head = champ->head;
+	rang(env, new);
+	champ->pc += 2;
 }
