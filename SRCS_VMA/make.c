@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 11:00:13 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/06 10:44:40 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/07 16:17:12 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,23 @@ void			make_arene(t_vm *env)
 		nbr++;
 	}
 	make_player(env, nbr);
+}
+
+int				put_name(int *cur, char **av)
+{
+	static int	name = 0;
+
+	if (ft_strcmp(av[*cur], "-n") == 0)
+	{
+		*cur += 1;
+		if (av[*cur][0] < (char)'0' || av[*cur][0] > (char)'9')
+			ft_vm_error("Erreur de format de la commande\n");
+		*cur += 1;
+		return (ft_atoi(av[*cur - 1]));
+	}
+	else
+	{
+		name++;
+		return (name);
+	}
 }

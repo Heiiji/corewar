@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 12:59:01 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/05 14:36:39 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/07 16:17:44 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct			s_vm
 
 void					ft_vm_error(char *error);
 long					check_live(t_vm *env);
+int						put_name(int *cur, char **av);
 void					make_arene(t_vm *env);
 void					make_player(t_vm *env, int nbr);
 void					rang(t_vm *env, t_champ *champ);

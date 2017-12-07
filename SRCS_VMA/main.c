@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/07 13:17:54 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/07 16:16:57 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,6 @@ void	ft_vm_error(char *error)
 {
 	ft_put(error, ft_strlen(error) - 1, 2, 0);
 	exit(0);
-}
-
-int		put_name(int *cur, char **av)
-{
-	static int	name = 0;
-
-	if (ft_strcmp(av[*cur], "-n") == 0)
-	{
-		*cur += 1;
-		if (av[*cur][0] < (char)'0' || av[*cur][0] > (char)'9')
-			ft_vm_error("Erreur de format de la commande\n");
-		*cur += 1;
-		return (ft_atoi(av[*cur - 1]));
-	}
-	else
-	{
-		name++;
-		return (name);
-	}
 }
 
 void	crawler(t_vm *env)
@@ -74,6 +55,28 @@ void	passive_check(int ac)
 		ft_vm_error("Erreur de variables d'environnement\n");
 }
 
+t_champ	*champions(int cur, t_champ *champ, char **av, int ac)
+{
+	t_champ *target;
+
+	while (cur < ac)
+	{
+		if (champ->next)
+			champ = champ->next;
+		champ->id = put_name(&cur, av);
+		champ->action = NULL;
+		if ((champ->fd = open(av[cur], O_RDONLY)) < 0)
+			ft_vm_error("Erreur d'ouverture des fichier\n");
+		ft_memset(champ->registre, 0, REG_SIZE * REG_NUMBER);
+		if (!(champ->next = (t_champ*)malloc(sizeof(t_champ))))
+			ft_vm_error("Erreur de malloc sur les champions\n");
+		cur++;
+	}
+	free(champ->next);
+	champ->next = NULL;
+	return (champ);
+}
+
 int		main(int ac, char **av)
 {
 	int		cur;
@@ -93,21 +96,7 @@ int		main(int ac, char **av)
 	}
 	else
 		env.nbr_cycles = CYCLE_TO_DIE;
-	while (cur < ac)
-	{
-		if (champ->next)
-			champ = champ->next;
-		champ->id = put_name(&cur, av);
-		champ->action = NULL;
-		if ((champ->fd = open(av[cur], O_RDONLY)) < 0)
-			ft_vm_error("Erreur d'ouverture des fichier\n");
-		ft_memset(champ->registre, 0, REG_SIZE * REG_NUMBER);
-		if (!(champ->next = (t_champ*)malloc(sizeof(t_champ))))
-			ft_vm_error("Erreur de malloc sur les champions\n");
-		cur++;
-	}
-	free(champ->next);
-	champ->next = NULL;
+	env.champ = champions(cur, champ, av, ac);
 	make_arene(&env);
 	crawler(&env);
 	ft_put(env.champ->head.prog_name, ft_strlen(env.champ->head.prog_name) - \
