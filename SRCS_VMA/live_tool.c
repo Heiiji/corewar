@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 09:51:00 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/06 10:31:27 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/07 13:18:56 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 static void	extend(t_champ **prev, t_champ **cur, t_vm *env)
 {
-	if (prev)
+	if (*prev)
 		(*prev)->next = (*cur)->next;
 	else
 	{
