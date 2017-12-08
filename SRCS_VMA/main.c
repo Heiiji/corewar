@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/07 16:16:57 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/08 09:16:33 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,21 @@ t_champ	*champions(int cur, t_champ *champ, char **av, int ac)
 {
 	t_champ *target;
 
+	target = NULL;
 	while (cur < ac)
 	{
-		if (champ->next)
-			champ = champ->next;
+		if (!(champ = (t_champ*)malloc(sizeof(t_champ))))
+			ft_vm_error("Erreur de malloc sur les champions\n");
 		champ->id = put_name(&cur, av);
 		champ->action = NULL;
 		if ((champ->fd = open(av[cur], O_RDONLY)) < 0)
 			ft_vm_error("Erreur d'ouverture des fichier\n");
 		ft_memset(champ->registre, 0, REG_SIZE * REG_NUMBER);
-		if (!(champ->next = (t_champ*)malloc(sizeof(t_champ))))
-			ft_vm_error("Erreur de malloc sur les champions\n");
 		cur++;
+		champ->next = target;
+		target = champ;
 	}
-	free(champ->next);
-	champ->next = NULL;
-	return (champ);
+	return (target);
 }
 
 int		main(int ac, char **av)
@@ -84,10 +83,6 @@ int		main(int ac, char **av)
 	t_champ	*champ;
 
 	passive_check(ac);
-	if (!(champ = (t_champ*)malloc(sizeof(t_champ))))
-		ft_vm_error("Erreur de malloc sur le premier champions\n");
-	env.champ = champ;
-	champ->next = NULL;
 	cur = 1;
 	if (ft_strcmp(av[1], "-dump") == 0)
 	{
