@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/26 11:00:13 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/07 16:17:12 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/08 10:02:23 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ void			make_arene(t_vm *env)
 
 	if (!(env->arene = (unsigned char*)malloc(MEM_SIZE)))
 		ft_vm_error("Erreur de malloc pour l'arene\n");
+	ft_memset(env->arene, 0, MEM_SIZE);
 	cur = env->champ;
+	nbr = 0;
 	while (cur)
 	{
 		cur = cur->next;

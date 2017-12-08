@@ -6,7 +6,7 @@
 /*   By: jjuret <jjuret@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 13:00:45 by jjuret            #+#    #+#             */
-/*   Updated: 2017/12/08 09:16:33 by jjuret           ###   ########.fr       */
+/*   Updated: 2017/12/08 10:02:18 by jjuret           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ t_champ	*champions(int cur, t_champ *champ, char **av, int ac)
 		cur++;
 		champ->next = target;
 		target = champ;
+		champ = NULL;
 	}
 	return (target);
 }
